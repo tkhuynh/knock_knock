@@ -1,2 +1,33 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="containter">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 user_signup_form">
+			<%= form_for @user do |f| %>
+				<h3>Sign Up</h3>
+				<div class="form-group">
+					<%=  f.label :name %>
+					<%=  f.text_field :name, class: "form-control", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%=  f.label :email %>
+					<%=  f.email_field :email, class: "form-control", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%=  f.label :type, "Role" %>
+					<%=  f.collection_select :type, ["Ta", "Student"], :to_s, :to_s,class: "form-control", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%=  f.label :password %>
+					<%=  f.password_field :password, class: "form-control", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%=  f.label :password_confirmation %>
+					<%=  f.password_field :password_confirmation, class: "form-control", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%= f.submit "Sign Up", class: "btn btn-primary form-control signup_button" %>
+				</div>
+			<% end %>
+			<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>
+		</div>
+	</div>
+</div>
