@@ -63,13 +63,23 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    #only current user can delete his own account
-    if current_user == @user
+    #when logged in TA delete 
+    if current_user.type == "Ta"
       @user.destroy
       session[:user_id] = nil
       flash[:notice] = "Successfully delete profile."
-      redirect_to root_path
+      redirect_to user_path(current_user)
+    #when logged in student delete his account, set cancel reserved account
+    elsif current_user.type == "Student"
+      current_user.meetings.each do |meeting|
+        meeting.student_id = nil
+      end
+      @user.destroy
+      session[:user_id] = nil
+      flash[:notice] = "Successfully delete profile."
+      redirect_to user_path(current_user)
     else
+      flash[:error] = "You can't delete someone else's profile." 
       redirect_to user_path(current_user)
     end
   end
