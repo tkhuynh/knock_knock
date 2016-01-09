@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+	root 'sessions#create'
+
   resources :users
   resources :meetings, except: :edit
   resources :tas, only: [:index, :show]
