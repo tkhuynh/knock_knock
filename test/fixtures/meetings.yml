@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  start: 2016-01-08 14:58:50
+  end: 2016-01-08 14:58:50
+  ta_id: 1
+  student_id: 1
+
+two:
+  subject: MyString
+  start: 2016-01-08 14:58:50
+  end: 2016-01-08 14:58:50
+  ta_id: 1
+  student_id: 1
