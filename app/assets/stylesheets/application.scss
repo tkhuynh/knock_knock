@@ -14,3 +14,49 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
+
+body,html {
+  height: 100%;
+  /*background:*/
+}
+
+body {
+  padding-top: 50px;
+}
+
+.header-img {
+  width:100%;
+  max-height: 100%;
+  margin-bottom: 30px;
+}
+
+.wide {
+  width:100%;
+  height:100%;
+  max-height: 400px;	
+  height:calc(100% - 1px);
+  /*background-image:url('http://www.parentcenterhub.org/wp-content/uploads/2010/09/rsz_meetingoncalendar.jpg');*/
+
+  background-image:url('http://depts.washington.edu/uwautism/wp-content/uploads/2015/06/calendar.jpg');
+
+  background-size:cover;
+}
+
+.wide img {
+  width:100%;
+}
+
+.logo {
+  color:#fff;
+  font-weight:800;
+  font-size:14pt;
+  padding:25px;
+  text-align:center;
+}
+
+.line {
+  padding-top:20px;
+  white-space:no-wrap;
+  overflow:hidden;
+  text-align:center;
+}
