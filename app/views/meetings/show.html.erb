@@ -1,2 +1,4 @@
-<h1>Meetings#show</h1>
-<p>Find me in app/views/meetings/show.html.erb</p>
+<h2><%= @meeting.subject %></h2>
+<h4><%= Ta.find(@meeting.ta_id).name %></h4>
+<h3><%= @meeting.start.localtime.to_formatted_s(:long_ordinal) %></h3>
+<h3><%= @meeting.end.localtime.to_formatted_s(:long_ordinal) %></h3>

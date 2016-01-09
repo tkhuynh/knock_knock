@@ -22,7 +22,7 @@ class MeetingsController < ApplicationController
       @meeting = current_user.meetings.new(meeting_params)
     	if @meeting.save
         flash[:notice] = "Successfully created a meeting."
-    		redirect_to user_path(current_user)
+    		redirect_to meeting_path(@meeting)
     	else
         flash[:errors] = @post.errors.full_messages.join(", ")
     		render action: :new # prevent clearing filled in form when validation failed
@@ -36,7 +36,7 @@ class MeetingsController < ApplicationController
   end
 
   def update
-    if current_user.type == "Student" AND @meeting.student_id == nil
+    if current_user.type == "Student" && @meeting.student_id == nil
       if @meeting.update_attributes(meeting_params)
         flash[:notice] = "Successfully reserved a meeting."
         redirect_to user_path(current_user)
