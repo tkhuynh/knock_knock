@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-  before_action :find_meeting, only: [:show, :update, :destroy]
+  before_action :find_meeting, only: [:show, :edit, :update, :destroy]
 
   def index
     @ta = Ta.find(params[:ta_id])
@@ -38,12 +38,29 @@ class MeetingsController < ApplicationController
   def show
   end
 
+  def edit
+    #only current logged in ta can see edit view of his non reserved meeting
+    unless current_user && current_user.id == @meeting.ta_id && @meeting.student_id == nil
+      redirect_to meeting_path(@meeting)
+    end
+  end
+
   def update
-    if current_user.type == "Student" && @meeting.student_id == nil
+
+    if current_user.type == "Ta" && @meeting.student_id == nil
+      if @meeting.update_attributes(meeting_params)
+        flash[:notice] = "Successfully edit a meeting."
+        redirect_to ta_path(current_user)
+      else
+        flash[:errors] = @post.errors.full_messages.join(", ")
+        # if error redirect back to visited ta meeting list
+        redirect_to ta_meetings_path(current_user)
+      end
+    elsif current_user.type == "Student" && @meeting.student_id == nil
       # when student reserve meeting, add student_id to meeting
       get_student_id = current_user.id
       if @meeting.update_attributes(student_id: get_student_id)
-        flash[:notice] = "Successfully reserved a meeting."
+        flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else
         flash[:errors] = @post.errors.full_messages.join(", ")
@@ -51,7 +68,7 @@ class MeetingsController < ApplicationController
         redirect_to ta_meetings_path(User.find(@meeting.ta_id))
       end
     else
-      redirect_to redirect_to meeting_path(@meeting)
+      redirect_to meeting_path(@meeting)
     end
   end
 

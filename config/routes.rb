@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 	root 'tas#index'
 
   resources :users
-  resources :meetings, except: [:edit, :index]
+  resources :meetings, except: :index
   resources :tas, only: [:index, :show, :edit, :update, :destroy] do 
     resources :meetings, only: :index
   end

@@ -18,7 +18,7 @@
 				<% elsif current_user && current_user.type == "Ta" %>
 					<% if meeting.student_id == nil %>
 						<h3><span class="label label-success">Available</span></h3>
-						<h3>Button Edit Here</h3>
+						<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-default" %>
 					<% else %>
 						<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
 					<% end %>
