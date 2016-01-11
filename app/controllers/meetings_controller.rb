@@ -59,9 +59,13 @@ class MeetingsController < ApplicationController
     if current_user.type == "Ta"
       @meeting.destroy
       flash[:notice] = "Successfully delete the meeting."
-      redirect_to user_path(current_user)
+      redirect_to ta_path(current_user)
+    elsif current_user.type == "Student"
+      @meeting.update_attributes(student_id: nil)
+      flash[:notice] = "Successfully cancel the meeting."
+      redirect_to student_path(current_user)
     else
-      redirect_to user_path(current_user)
+      redirect_to student_path(current_user)
     end
   end
 

@@ -1,24 +1,43 @@
 class StudentsController < ApplicationController
+
+  before_action :find_student, only: [:show, :edit, :update, :destroy]
+
   def show
-    @student =Student.find_by_id(params[:id])
+  end
+
+  def edit
+    #only allow current logged in student see edit form
+    if current_user == @student
+
+    #prevent ta to see student edit form
+    elsif current_user.type == "Ta"
+      redirect_to ta_path(current_user)
+    #prevent current logged in see other student edit form
+    elsif current_user != @student
+      redirect_to student_path(current_user)
+    end
   end
 
   def update
-  	@student =Student.find_by_id(params[:id])
   	student_params = params.require(:student).permit(:name, :email, :type, :password, :password_confirmation)
-    #only current user can update his own account
+    #only current user (student) can update his own account
     if current_user == @student
       if @student.update_attributes(student_params)
         flash[:notice] = "Successfully updated profile."
         redirect_to student_path(current_user)
       else
         flash[:error] = @student.errors.full_messages.join(', ')
-        redirect_to edit_user_path(@student)
+        redirect_to edit_student_path(@student)
       end
     else 
       #if someone else redirect to current user profile
-      redirect_to user_path(current_user)
+      redirect_to student_path(current_user)
     end
+  end
+
+private
+  def find_student
+    @student =Student.find_by_id(params[:id])
   end
 
 end
