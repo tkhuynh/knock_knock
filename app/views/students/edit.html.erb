@@ -1,7 +1,7 @@
 <div class="containter">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
-			<%= form_for :user, url: user_path(@user), method: :patch, html: { multipart: true } do |f| %>
+			<%= form_for @student do |f| %>
 				<h3>Edit Profile</h3>
 				<div class="form-group">
 					<%=  f.label :name %>

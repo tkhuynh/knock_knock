@@ -1,4 +1,19 @@
 <h2><%= @meeting.subject %></h2>
-<h4><%= Ta.find(@meeting.ta_id).name %></h4>
-<h3><%= @meeting.start.localtime.to_formatted_s(:long_ordinal) %></h3>
-<h3><%= @meeting.end.localtime.to_formatted_s(:long_ordinal) %></h3>
+<h4><%= Ta.find(@meeting.ta_id).name unless current_user && current_user.type == "Ta" %></h4>
+<h3><%= @meeting.start.to_formatted_s(:long_ordinal) %></h3>
+<h3><%= @meeting.end.to_formatted_s(:long_ordinal) %></h3>
+<% if !current_user || (current_user && current_user.type == "Student") %>
+	<% if @meeting.student_id == nil %>
+		<%= button_to "Reserve", meeting_path(@meeting), method: :put, class: "btn btn-success" %>
+	<% else %>
+		<h4>Reserved by: <%= link_to Student.find(@meeting.student_id).name, student_path(@meeting.student_id) %></h4>
+	<% end %>
+<% elsif current_user && current_user.type == "Ta" %>
+	<% if @meeting.student_id == nil %>
+		<span class="label label-success">Available</span>
+		<%= link_to "Edit", edit_meeting_path(@meeting), class: "btn btn-default" %>
+	<% else %>
+		<h4>Reserved by: <%= link_to Student.find(@meeting.student_id).name, student_path(@meeting.student_id) %></h4>
+	<% end %>
+<% end %>
+<%= link_to "Back to List", ta_meetings_path(@meeting.ta_id), class: "btn btn-primary" %>

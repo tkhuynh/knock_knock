@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+        		<%= form_for @meeting do |f| %>
+							<div class="form-group">
+								<%= f.label :subject %>
+								<%= f.text_field :subject, class: "form-control", autofocus: true %>
+							</div>
+	            <div class="form-group">
+	            	<%= f.label :start %>
+                <div class='input-group date' id='datetimepicker_start'>
+                  <%= f.datetime_field :start, type: 'text', class: "form-control" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+	            </div>
+	            <div class="form-group">
+	           		<%= f.label :end %>
+                <div class='input-group date' id='datetimepicker_end'>
+                  <%= f.datetime_field :end, type: 'text', class: "form-control" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+	            </div>
+	            <div class="form-group">
+	            	<%= f.submit "Submit", class: "btn btn-success" %>
+                <%= link_to "Cancel", ta_path(@ta), class: "btn btn-default" %>
+	            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
