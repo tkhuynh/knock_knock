@@ -21,7 +21,7 @@
 
 <div class="containter">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 user_signup_form">
+		<div class="col-sm-6 col-sm-offset-3">
 			<%= form_for @user do |f| %>
 				<h3>Sign Up</h3>
 				<div class="form-group">
@@ -45,7 +45,7 @@
 					<%=  f.password_field :password_confirmation, class: "form-control", autofocus: true %>
 				</div>
 				<div class="form-group">
-					<%= f.submit "Sign Up", class: "btn btn-primary form-control signup_button" %>
+					<%= f.submit "Sign Up", class: "btn btn-primary form-control" %>
 				</div>
 			<% end %>
 			<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>

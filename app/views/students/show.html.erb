@@ -5,3 +5,23 @@
 <%= image_tag @student.image.url(:thumb) %>
 <h2><%= @student.name %></h2>
 
+<%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn btn-primary" %>
+<%= link_to 'Delete Profile', @user, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+<%= link_to "Book a Meeting", tas_path, class: "btn btn-primary" %>
+
+<% @student.meetings.each do |meeting| %>
+	<div class="row">
+	  <div class="col-sm-6 col-md-4">
+	    <div class="thumbnail">
+	      <div class="caption">
+	        <h3><%= link_to meeting.subject %></h3>
+	        <h4><strong>Date:</strong> <%= meeting.start.to_date %></h3>
+					<h4><strong>Start:</strong> <%= meeting.start.hour %>:<%= meeting.start.min %></h4>
+					<h4><strong>End:</strong> <%= meeting.end.hour %>:<%= meeting.end.min %></h4>
+					<%= link_to "Cancel", meeting, method: :delete, class: "btn btn-danger" %>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+
