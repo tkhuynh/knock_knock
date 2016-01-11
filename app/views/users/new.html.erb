@@ -1,9 +1,39 @@
 <!-- Header -->
-<div class="wide">
+
+
+<!-- Header version 1 -->
+<!-- <div class="wide">
   	<div class="col-xs-5 line"><hr></div>
     <div class="col-xs-2 logo">Knock Knock</div>
     <div class="col-xs-5 line"><hr></div>
-</div>
+</div> -->
+
+
+<!-- Header version 2 -->
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1>Knock-Knock</h1>
+            <hr>
+            <p>Find a availabe tutors to provide personalized assistance in your learning process</p>
+            <a href="#about" class="btn btn-primary btn-xl page-scroll">Book a tutor</a> <a href="#about" class="btn btn-primary btn-xl page-scroll">Become a tutor</a>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">What we do</h2>
+                    <hr class="light">
+                    <p class="text-faded">Knocl-Knock, facilitates the coordination for students and tutors to be able to meet</p>
+                    <a href="#" class="btn btn-default btn-xl">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 <div class="container">
   <div class="text-center">
@@ -15,13 +45,15 @@
 
 
 
-<!-- will move the landing page to another place later -->
+
+
+<!-- Log in form will move the landing page to another place later -->
 
 
 
-<div class="containter">
+<div class="containter" >
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 user_signup_form">
+		<div class="col-sm-6 col-sm-offset-3 user_signup_form well">
 			<%= form_for @user do |f| %>
 				<h3>Sign Up</h3>
 				<div class="form-group">

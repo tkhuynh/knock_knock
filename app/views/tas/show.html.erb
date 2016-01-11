@@ -1,3 +1,31 @@
-<h1>Tas#show</h1>
-<p>Find me in app/views/tas/show.html.erb</p>
-<h2><%= @ta.name %></h2>
+
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col xs-12">
+      <div class="well">
+        <div class="extra-padding">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h2>picture will be here (paperclip)</h2>
+            </div>
+          </div>
+          <div class="row">       
+            <hr>
+            <h3 class="text-left"><strong>Name:</strong>  <%= @ta.name %></h3>
+            <hr>
+            <h3 class="text-left"><strong>Email:</strong>  <%= @ta.email %></h3>
+            
+          </div>
+          <%= link_to "Add Availability", new_meeting_path, class: "btn btn-block btn-default"%>
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+
+

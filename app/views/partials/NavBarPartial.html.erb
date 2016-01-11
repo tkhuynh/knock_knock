@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>KnockKnock</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
 <nav id='nav' class='navbar navbar-default navbar-fixed-top'>
   <div class='container-fluid'>
     <div class='navbar-header'>
@@ -45,15 +35,10 @@
       <ul class='nav navbar-nav pull-left'>
       <% if params[:controller] == 'meeting' || params[:controller] == 'posts' %>
         <li>
-          <%= link_to @city.name, city_path(@city) %>
+          <%= link_to @meeting.name, meeting_path(@meeting) %>
         </li>
       </ul>
       <% end %>
     </div>
   </div>
 </nav>
-
-<%= yield %>
-
-</body>
-</html>
