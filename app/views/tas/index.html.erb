@@ -1,7 +1,7 @@
 <h1>Tas#index</h1>
 <p>Find me in app/views/tas/index.html.erb</p>
 <% @tas.each do |ta| %>
-		<h2><%= link_to ta.name, ta_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
+		<h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
 		<h3>
 			Subjects: 
 			<% ta.meetings.each do |meeting| %>

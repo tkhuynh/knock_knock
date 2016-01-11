@@ -38,7 +38,7 @@ class StudentsController < ApplicationController
   def destroy
     if current_user.type == "Student"
       current_user.meetings.each do |meeting|
-        meeting..update_attributes(student_id: nil)
+        meeting.update_attributes(student_id: nil)
       end
       @student.destroy
       session[:user_id] = nil

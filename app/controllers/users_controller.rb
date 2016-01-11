@@ -26,7 +26,11 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "Successfully signed up."
-        redirect_to user_path(@user)
+        if @user.type == "Ta"
+          redirect_to ta_path(@user)
+        else
+          redirect_to student_path(@user)
+        end
       else
         flash[:error] = @user.errors.full_messages.join(', ')
         redirect_to signup_path

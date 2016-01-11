@@ -1,5 +1,5 @@
 <h2><%= @meeting.subject %></h2>
-<h4><%= Ta.find(@meeting.ta_id).name unless current_user.type == "Ta" %></h4>
+<h4><%= Ta.find(@meeting.ta_id).name unless current_user && current_user.type == "Ta" %></h4>
 <h3><%= @meeting.start.to_formatted_s(:long_ordinal) %></h3>
 <h3><%= @meeting.end.to_formatted_s(:long_ordinal) %></h3>
 <% if !current_user || (current_user && current_user.type == "Student") %>

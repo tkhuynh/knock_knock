@@ -40,6 +40,7 @@ class MeetingsController < ApplicationController
 
   def edit
     #only current logged in ta can see edit view of his non reserved meeting
+    @ta = current_user
     unless current_user && current_user.id == @meeting.ta_id && @meeting.student_id == nil
       redirect_to meeting_path(@meeting)
     end
