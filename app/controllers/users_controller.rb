@@ -51,7 +51,11 @@ class UsersController < ApplicationController
     if current_user == @user
       if @user.update_attributes(user_params)
         flash[:notice] = "Successfully updated profile."
-        redirect_to user_path(@user)
+        if current_user.type = "Ta"
+          redirect_to ta_path(current_user)
+        else
+          redirect_to student_path(current_user)
+        end
       else
         flash[:error] = @user.errors.full_messages.join(', ')
         redirect_to edit_user_path(@user)

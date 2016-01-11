@@ -1,14 +1,16 @@
 class MeetingsController < ApplicationController
 
-  before_action :find_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :find_meeting, only: [:show, :update, :destroy]
 
   def index
-  	@meetings= Meeting.all
+    @ta = Ta.find(params[:ta_id])
+  	@meetings= Ta.find(@ta).meetings
   end
 
   def new
     #only current user who is TA to see new meeting form
-    if current_user.type == "Ta"    
+    if current_user.type == "Ta" 
+    @ta = current_user   
   	 @meeting = Meeting.new
     else
       flash[:error] = "Login or signup as TA to create a meeting."
@@ -19,6 +21,7 @@ class MeetingsController < ApplicationController
   def create
     #only current user who is TA to create new meeting
     if current_user.type == "Ta"
+      @ta = current_user
       @meeting = current_user.meetings.new(meeting_params)
     	if @meeting.save
         flash[:notice] = "Successfully created a meeting."
@@ -37,12 +40,15 @@ class MeetingsController < ApplicationController
 
   def update
     if current_user.type == "Student" && @meeting.student_id == nil
-      if @meeting.update_attributes(meeting_params)
+      # when student reserve meeting, add student_id to meeting
+      get_student_id = current_user.id
+      if @meeting.update_attributes(student_id: get_student_id)
         flash[:notice] = "Successfully reserved a meeting."
-        redirect_to user_path(current_user)
+        redirect_to student_path(current_user)
       else
         flash[:errors] = @post.errors.full_messages.join(", ")
-        redirect_to user_path(User.find(@meeting.ta_id))
+        # if error redirect back to visited ta meeting list
+        redirect_to ta_meetings_path(User.find(@meeting.ta_id))
       end
     else
       redirect_to redirect_to meeting_path(@meeting)
@@ -61,6 +67,7 @@ class MeetingsController < ApplicationController
 
 private
   def meeting_params
+    puts params[:start]
     params.require(:meeting).permit(:subject, :start, :end, :ta_id, :student_id)
   end
 

@@ -19,6 +19,10 @@
 //= require_tree .
 
 $(function() {
-	$('#datetimepicker_start').datetimepicker();
-	$('#datetimepicker_end').datetimepicker();
+	$('#datetimepicker_start').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm a'
+});
+	$('#datetimepicker_end').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm a'
+});
 });
