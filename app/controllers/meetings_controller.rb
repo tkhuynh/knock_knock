@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully created a meeting."
     		redirect_to meeting_path(@meeting)
     	else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
     		render action: :new # prevent clearing filled in form when validation failed
     	end
     else
@@ -91,8 +91,7 @@ class MeetingsController < ApplicationController
 
 private
   def meeting_params
-    puts params[:start]
-    params.require(:meeting).permit(:subject, :start, :end, :ta_id, :student_id)
+    params.require(:meeting).permit(:subject, :start_time, :end_time, :ta_id, :student_id)
   end
 
   def find_meeting
