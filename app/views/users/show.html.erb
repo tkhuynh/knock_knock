@@ -1,0 +1,62 @@
+<!-- <h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p> -->
+ 
+<!-- NavBarPartials bellow -->
+<nav id='nav' class='navbar navbar-default navbar-fixed-top'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-navbar'>
+        <span class='sr-only'>Toggle navigation</span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+      </button>
+      <a class="siteLogo siteLogoNav navbar-brand page-scroll a" href="/">Knock Knock</a>
+    </div>
+    <div class='navbar-collapse collapse' id='bs-navbar'>
+      <ul class='nav navbar-nav pull-right'>
+        <% if current_user %>
+          <% if params[:controller] == 'user' && params[:action] == 'show' %>
+          <li>
+            <%= link_to 'New Meeting', new_meeting_post_path(@meeting, @post) %>
+          </li>
+          <% end %>
+          <li>
+            <%= link_to 'Profile', user_path(current_user) %>
+          </li>
+          <li>
+            <%= link_to 'Logout', logout_path %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to 'Sign Up', new_user_path %>
+          </li>
+          <li>
+            <%= link_to 'Login', login_path %>
+          </li>
+        <% end %>
+      </ul>
+      <ul class='nav navbar-nav pull-left'>
+      <% if params[:controller] == 'meeting' || params[:controller] == 'posts' %>
+        <li>
+          <%= link_to @city.name, city_path(@city) %>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</nav><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="wide">
+  	<div class="col-xs-5 line"><hr></div>
+    <div class="col-xs-2 logo">Logo</div>
+    <div class="col-xs-5 line"><hr></div>
+</div>
+
+<div class="container">
+  <div class="text-center">
+    <h1>Content</h1>
+  </div>
+</div><!-- /.container
