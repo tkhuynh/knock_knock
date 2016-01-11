@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :meetings, except: :index
-  resources :tas, only: [:index, :show, :edit, :update, :destroy] do 
+  resources :tas, only: [:index, :show] do 
     resources :meetings, only: :index
   end
-  resources :students, only: [:show, :edit, :update, :destroy]
+  resources :students, only: [:show]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

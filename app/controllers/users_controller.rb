@@ -46,7 +46,13 @@ class UsersController < ApplicationController
     #don't let current user see edit form of other user profile
     #see private method
     unless current_user == @user
-      redirect_to user_path(current_user)
+      if current_user.type == "Ta"
+        flash[:notice] = "You can only edit your profile."
+        redirect_to ta_path(current_user)
+      else 
+        flash[:notice] = "You can only edit your profile."
+        redirect_to student_path(current_user)
+      end
     end
   end
 
@@ -55,10 +61,10 @@ class UsersController < ApplicationController
     if current_user == @user
       if @user.update_attributes(user_params)
         flash[:notice] = "Successfully updated profile."
-        if current_user.type = "Ta"
-          redirect_to ta_path(current_user)
-        else
-          redirect_to student_path(current_user)
+        if current_user.type == "Student"
+          redirect_to student_path(@user)
+        elsif current_user.type == "Ta"
+          redirect_to ta_path(@user)
         end
       else
         flash[:error] = @user.errors.full_messages.join(', ')
@@ -72,20 +78,20 @@ class UsersController < ApplicationController
 
   def destroy
     #when logged in TA delete 
-    if current_user.type == "Ta"
+    if current_user.type == "Ta" && current_user == @user
       @user.destroy
       session[:user_id] = nil
       flash[:notice] = "Successfully delete profile."
-      redirect_to user_path(current_user)
+      redirect_to root_path
     #when logged in student delete his account, set cancel reserved account
-    elsif current_user.type == "Student"
+    elsif current_user.type == "Student" && current_user == @user
       current_user.meetings.each do |meeting|
-        meeting.student_id = nil
+        meeting.update_attributes(student_id: nil)
       end
       @user.destroy
       session[:user_id] = nil
       flash[:notice] = "Successfully delete profile."
-      redirect_to user_path(current_user)
+      redirect_to root_path
     else
       flash[:error] = "You can't delete someone else's profile." 
       redirect_to user_path(current_user)
