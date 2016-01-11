@@ -1,7 +1,9 @@
 <h2>picture will be here</h2>
 <h2><%= @ta.name %></h2>
 <h2><%= @ta.email %></h2>
-<% if current_user.type == "Ta" %>
+<% if current_user && current_user.type == "Ta" %>
 	<%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
-<% end  %>
-<%= link_to "Available Meeting", ta_meetings_path(@ta), class: "btn btn-primary" %>
+	<%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+<% else %>
+	<%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+<% end %>

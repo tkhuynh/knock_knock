@@ -30,6 +30,7 @@
               <% else %>
                 <li><%= link_to 'Profile', student_path(current_user) %></li>
                 <li><%= link_to 'Edit Profile', edit_student_path(current_user) %></li>
+                <li><%= link_to 'Delete Profile', @student, method: :delete, data: {confirm: "Are You Sure? "}  %></li>
               <% end %>
               <li><%= link_to 'Logout', logout_path %></li>
             </ul>

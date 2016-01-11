@@ -35,6 +35,20 @@ class StudentsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.type == "Student"
+      current_user.meetings.each do |meeting|
+        meeting..update_attributes(student_id: nil)
+      end
+      @student.destroy
+      session[:user_id] = nil
+      flash[:notice] = "Successfully delete profile."
+      redirect_to root_path
+    else
+      redirect_to student_path(current_user) || ta_path(current_user)
+    end
+  end
+
 private
   def find_student
     @student =Student.find_by_id(params[:id])
