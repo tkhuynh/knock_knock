@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
-	root 'sessions#create'
+	root 'tas#index'
 
   resources :users
-  resources :meetings, except: :edit
-  resources :tas, only: [:index, :show]
-  resources :students, only: :show
+  resources :meetings, except: :index
+  resources :tas, only: [:index, :show] do 
+    resources :meetings, only: :index
+  end
+  resources :students, only: [:show]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

@@ -13,9 +13,11 @@ class SessionsController < ApplicationController
 		if @user && @user.authenticate(params[:password])
 			session[:user_id] = @user.id
 			if @user.type == "Ta"
+				#after login redirect ta to profile page
 				redirect_to ta_path(@user)
 			else
-				redirect_to student_path(@user)
+				#after login redirect student to all TA page
+				redirect_to tas_path
 			end
 		else
 			flash[:error] = "Incorrect email or password."

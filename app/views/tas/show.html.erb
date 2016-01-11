@@ -1,31 +1,10 @@
 
-
-
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-sm-6 col xs-12">
-      <div class="well">
-        <div class="extra-padding">
-          <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-              <h2>picture will be here (paperclip)</h2>
-            </div>
-          </div>
-          <div class="row">       
-            <hr>
-            <h3 class="text-left"><strong>Name:</strong>  <%= @ta.name %></h3>
-            <hr>
-            <h3 class="text-left"><strong>Email:</strong>  <%= @ta.email %></h3>
-            
-          </div>
-          <%= link_to "Add Availability", new_meeting_path, class: "btn btn-block btn-default"%>
-        </div>
-      </div>
-    </div>
-	</div>
-</div>
-
-
+<h2>picture will be here</h2>
+<h2><%= @ta.name %></h2>
+<h2><%= @ta.email %></h2>
+<% if current_user && current_user.type == "Ta" %>
+	<%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
+	<%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+<% else %>
+	<%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+<% end %>

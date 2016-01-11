@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav id='nav' class='navbar navbar-default navbar-fixed-top'>
+<nav id='nav' class='navbar navbar-default'>
   <div class='container-fluid'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-navbar'>
@@ -22,36 +22,33 @@
     <div class='navbar-collapse collapse' id='bs-navbar'>
       <ul class='nav navbar-nav pull-right'>
         <% if current_user %>
-          <% if params[:controller] == 'user' && params[:action] == 'show' %>
-          <li>
-            <%= link_to 'New Meeting', new_meeting_post_path(@meeting, @post) %>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.name %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user.type == "Ta" %>
+                <li><%= link_to 'Profile', ta_path(current_user) %></li>
+              <% elsif current_user.type == "Student" %>
+                <li><%= link_to 'Profile', student_path(current_user) %></li>
+              <% end %>
+              <li><%= link_to 'Logout', logout_path %></li>
+            </ul>
           </li>
-          <% end %>
-          <li>
-            <%= link_to 'Profile', user_path(current_user) %>
-          </li>
-          <li>
-            <%= link_to 'Logout', logout_path %>
-          </li>
-          <% else %>
-          <li>
-            <%= link_to 'Sign Up', new_user_path %>
-          </li>
-          <li>
-            <%= link_to 'Login', login_path %>
-          </li>
+        <% else %>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
         <% end %>
       </ul>
-      <ul class='nav navbar-nav pull-left'>
-      <% if params[:controller] == 'meeting' || params[:controller] == 'posts' %>
-        <li>
-          <%= link_to @city.name, city_path(@city) %>
-        </li>
-      </ul>
-      <% end %>
     </div>
   </div>
 </nav>
+
+<!-- error message -->
+<% flash.each do |name, msg| %>
+  <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+    <div class="container">
+      <%= msg %>
+    </div>
+  </div>
+<% end %>
 
 <%= yield %>
 
