@@ -6,7 +6,7 @@
 <h2><%= @student.name %></h2>
 
 <%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn btn-primary" %>
-<%= link_to 'Delete Profile', @user, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+<%= link_to 'Delete Profile', user_path(current_user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
 <%= link_to "Book a Meeting", tas_path, class: "btn btn-primary" %>
 
 <% @student.meetings.each do |meeting| %>
