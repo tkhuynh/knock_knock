@@ -52,5 +52,7 @@ group :development do
   gem 'spring'
 
   gem "paperclip", "~> 4.3"
+
+  gem "aws-sdk"
 end
 
