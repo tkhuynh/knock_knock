@@ -55,9 +55,9 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully edit a meeting."
         redirect_to ta_path(current_user)
       else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
         # if error redirect back to visited ta meeting list
-        redirect_to ta_meetings_path(current_user)
+        redirect_to edit_meeting_path(@meeting)
       end
     elsif current_user.type == "Student" && @meeting.student_id == nil
       # when student reserve meeting, add student_id to meeting
@@ -66,9 +66,9 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
         # if error redirect back to visited ta meeting list
-        redirect_to ta_meetings_path(User.find(@meeting.ta_id))
+        redirect_to edit_meeting_path(@meeting)
       end
     else
       redirect_to meeting_path(@meeting)
