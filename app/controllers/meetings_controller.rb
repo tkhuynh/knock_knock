@@ -46,8 +46,10 @@ class MeetingsController < ApplicationController
   end
 
   def update
-
-    if current_user.type == "Ta" && @meeting.student_id == nil
+    if !current_user
+      flash[:errors] = "Please login to reserve or edit."
+      redirect_to meeting_path(@meeting)
+    elsif current_user.type == "Ta" && @meeting.student_id == nil
       if @meeting.update_attributes(meeting_params)
         flash[:notice] = "Successfully edit a meeting."
         redirect_to ta_path(current_user)

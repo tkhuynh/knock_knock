@@ -44,6 +44,15 @@
   </div>
 </nav>
 
+<!-- error message -->
+<% flash.each do |name, msg| %>
+  <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+    <div class="container">
+      <%= msg %>
+    </div>
+  </div>
+<% end %>
+
 <%= yield %>
 
 </body>
