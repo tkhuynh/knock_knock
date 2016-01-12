@@ -18,18 +18,39 @@ class MeetingsController < ApplicationController
     end
   end
 
+  # def create
+  #   #only current user who is TA to create new meeting
+  #   if current_user.type == "Ta"
+  #     @ta = current_user
+  #     @meeting = current_user.meetings.new(meeting_params)
+  #   	if @meeting.save
+  #       flash[:notice] = "Successfully created a meeting."
+  #   		redirect_to meeting_path(@meeting)
+  #   	else
+  #       flash[:errors] = @meeting.errors.full_messages.join(", ")
+  #   		render action: :new # prevent clearing filled in form when validation failed
+  #   	end
+  #   else
+  #     redirect_to login_path
+  #   end
+  # end
+
   def create
-    #only current user who is TA to create new meeting
-    if current_user.type == "Ta"
+    if current_user.type = "Ta"
       @ta = current_user
-      @meeting = current_user.meetings.new(meeting_params)
-    	if @meeting.save
-        flash[:notice] = "Successfully created a meeting."
-    		redirect_to meeting_path(@meeting)
-    	else
-        flash[:errors] = @meeting.errors.full_messages.join(", ")
-    		render action: :new # prevent clearing filled in form when validation failed
-    	end
+      available_time_start =  Time.parse(meeting_params[:start_time]).to_i
+      available_time_end = Time.parse(meeting_params[:end_time]).to_i
+      # 30 min slot
+      slots = ((available_time_end - available_time_start) / 1800).floor
+      (0...slots).each do |i|
+        @meeting = current_user.meetings.new(start_time: Time.at(available_time_start + 1800*i), end_time: Time.at(available_time_start + 1800*(i+1)), ta_id: current_user.id)
+        if @meeting.save
+        else
+          flash[:errors] = @meeting.errors.full_messages.join(", ")
+          render action: :new and return
+        end
+      end
+      redirect_to ta_path(current_user)
     else
       redirect_to login_path
     end
@@ -40,8 +61,8 @@ class MeetingsController < ApplicationController
 
   def edit
     #only current logged in ta can see edit view of his non reserved meeting
-    @ta = current_user
-    unless current_user && current_user.id == @meeting.ta_id && @meeting.student_id == nil
+    @ta = Ta.find(@meeting.ta_id)
+    unless current_user and @meeting.student_id == nil
       redirect_to meeting_path(@meeting)
     end
   end
@@ -61,8 +82,9 @@ class MeetingsController < ApplicationController
       end
     elsif current_user.type == "Student" && @meeting.student_id == nil
       # when student reserve meeting, add student_id to meeting
+      get_subject = meeting_params[:subject]
       get_student_id = current_user.id
-      if @meeting.update_attributes(student_id: get_student_id)
+      if @meeting.update_attributes(subject: get_subject, student_id: get_student_id)
         flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else

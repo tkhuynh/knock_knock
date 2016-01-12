@@ -20,8 +20,8 @@
 $(function() {
 	$('#datetimepicker_start').datetimepicker({
     format: 'YYYY-MM-DD HH:mm a'
-});
+	});
 	$('#datetimepicker_end').datetimepicker({
     format: 'YYYY-MM-DD HH:mm a'
-});
+	});
 });
