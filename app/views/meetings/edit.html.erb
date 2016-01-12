@@ -1,4 +1,21 @@
-<h1>Meetings#edit</h1>
-<p>Find me in app/views/meetings/edit.html.erb</p>
 <h1>Edit Meeting</h1>
-<%= render "form" %>
+<% if current_user.type == "Ta" %>
+	<%= render "form" %>
+<% elsif current_user.type == "Student" %>
+	<div class="container">
+    <div class="row">
+      <div class='col-sm-6'>
+      		<%= form_for @meeting do |f| %>
+            <div class="form-group">
+							<%= f.label :subject %>
+							<%= f.text_field :subject, class: "form-control", autofocus: true %>
+						</div>
+            <div class="form-group">
+            	<%= f.submit "Reserve", class: "btn btn-success" %>
+              <%= link_to "Cancel", student_path(current_user), class: "btn btn-default" %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+</div>
+<% end %>

@@ -1,25 +1,18 @@
-
-
 <div class="container well">
-    
-        <div class="col-lg-12 text-center">
-            <% if @tas %>
-            	<% @tas.each do |ta| %>
-            	<h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
-            	<h3>
-            	<!-- Subjects:  -->
-            	<% ta.meetings.each do |meeting| %>
-            	<span class="label label-default"><%= link_to meeting.subject, meeting_path(meeting) %></span>
-            		<% end %>
-            	</h3>
-            <% end %>
-            <% else %>
-            	<h1 text-center>There aren't any TA signed up!</h1>
-            <% end %>
-            <hr class="primary">
-        </div>
-
+  <div class="col-lg-12 text-center">
+    <% if @tas %>
+      <% @tas.each do |ta| %>
+        <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
+        <h3>
+          <span class="label label-default"><%= link_to "View Profile", ta_path(ta) %></span>
+        </h3>
+        <h3>
+          <span class="label label-default"><%= link_to "View Availability", ta_meetings_path(ta) %></span>
+        </h3>
+      <% end %>
+    <% else %>
+        <h1 text-center>There aren't any TA signed up!</h1>
+    <% end %>
+    <hr class="primary">
+  </div>
 </div>
-
-
-
