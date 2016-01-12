@@ -1,8 +1,12 @@
+
+
+
+
 <div class="container well">
 	<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
 		<% @meetings.each do |meeting| %>
-			<div class="row">
-			  <div class="col-sm-6 col-md-4">
+			
+			  <div class="col-sm-6 col-md-4 col-lg-4 text-center">
 			    <div class="thumbnail">
 			      <div class="caption">
 			        <h3><%= link_to meeting.subject, meeting_path(meeting) %></h3>
@@ -11,7 +15,7 @@
 							<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
 							<% if !current_user || (current_user && current_user.type == "Student") %>
 								<% if meeting.student_id == nil %>
-									<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-success" %>
+									<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-primary" %>
 								<% else %>
 									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
 								<% end %>
@@ -24,12 +28,12 @@
 								<% end %>
 							<% end %>	
 			      </div>
-			    </div>
+			
 			  </div>
 			</div>
 		<% end %>
-	<%= link_to "All TAs", tas_path, class: "btn btn-primary" %>
+	<%= link_to "All TAs", tas_path, class: "btn btn-secondary" %>
 	<% if current_user && current_user.type = "Ta" %>
-		<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-default" %>
+		<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
 	<% end %>
 </div>
