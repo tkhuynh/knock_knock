@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully created a meeting."
     		redirect_to meeting_path(@meeting)
     	else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
     		render action: :new # prevent clearing filled in form when validation failed
     	end
     else
@@ -55,9 +55,9 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully edit a meeting."
         redirect_to ta_path(current_user)
       else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
         # if error redirect back to visited ta meeting list
-        redirect_to ta_meetings_path(current_user)
+        redirect_to edit_meeting_path(@meeting)
       end
     elsif current_user.type == "Student" && @meeting.student_id == nil
       # when student reserve meeting, add student_id to meeting
@@ -66,9 +66,9 @@ class MeetingsController < ApplicationController
         flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else
-        flash[:errors] = @post.errors.full_messages.join(", ")
+        flash[:errors] = @meeting.errors.full_messages.join(", ")
         # if error redirect back to visited ta meeting list
-        redirect_to ta_meetings_path(User.find(@meeting.ta_id))
+        redirect_to edit_meeting_path(@meeting)
       end
     else
       redirect_to meeting_path(@meeting)
@@ -91,8 +91,7 @@ class MeetingsController < ApplicationController
 
 private
   def meeting_params
-    puts params[:start]
-    params.require(:meeting).permit(:subject, :start, :end, :ta_id, :student_id)
+    params.require(:meeting).permit(:subject, :start_time, :end_time, :ta_id, :student_id)
   end
 
   def find_meeting

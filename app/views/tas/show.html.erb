@@ -6,8 +6,10 @@
             	<h2><%= @ta.name %></h2>
             	<h2><%= @ta.email %></h2>
             	<% if current_user && current_user.type == "Ta" %>
+                    <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
             		<%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
             		<%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+
             	<% else %>
             		<%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
             	<% end %>
