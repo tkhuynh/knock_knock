@@ -1,35 +1,72 @@
 <div class="container well">
-	<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
-		<% @meetings.each do |meeting| %>
-			<div class="row">
-			  <div class="col-sm-6 col-md-4">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#home">All meetings</a></li>
+		  <li><a data-toggle="tab" href="#menu1">Monday</a></li>
+		  <li><a data-toggle="tab" href="#menu2">Tuesday</a></li>
+		  <li><a data-toggle="tab" href="#menu3">Wednesday</a></li>
+		  <li><a data-toggle="tab" href="#menu4">Thursday</a></li>
+		  <li><a data-toggle="tab" href="#menu5">Friday</a></li>
+		</ul>
+		<div class="tab-content">
+		  <div id="home" class="tab-pane fade in active">
+		    <h3>All meetings</h3>
+		    <p></p>
+		  </div>
+		  <div id="menu1" class="tab-pane fade">
+		    <h3>Monday</h3>
+		    <p>Some content for Monday's info.</p>
+		  </div>
+		  <div id="menu2" class="tab-pane fade">
+		    <h3>Tuesday</h3>
+		    <p>Some content for Tuesdya's info.</p>
+		  </div>
+		  <div id="menu3" class="tab-pane fade">
+		    <h3>Wednesday</h3>
+		    <p>Some content for Wednesday's info.</p>
+		  </div>
+		  <div id="menu4" class="tab-pane fade">
+		    <h3>Thursday</h3>
+		    <p>Some content for Tursday's info.</p>
+		  </div>
+		  <div id="menu5" class="tab-pane fade">
+		    <h3>Friday</h3>
+		    <p>Some content for Friday's info.</p>
+		</div>
+			<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
+				<% @meetings.each do |meeting| %>
+			  <div class="col-sm-6 col-md-4 col-lg-4 text-center">
 			    <div class="thumbnail">
 			      <div class="caption">
+			      	<div id="home" class="tab-pane fade in active">
 			        <h3><%= link_to meeting.subject, meeting_path(meeting) %></h3>
-			        <h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h3>
+			        <h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h4>
 							<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
 							<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
 							<% if !current_user || (current_user && current_user.type == "Student") %>
 								<% if meeting.student_id == nil %>
-									<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-success" %>
+									<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-primary" %>
 								<% else %>
-									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+							<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
 								<% end %>
-							<% elsif current_user && current_user.type == "Ta" %>
-								<% if meeting.student_id == nil %>
-									<h3><span class="label label-success">Available</span></h3>
-									<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-default" %>
-								<% else %>
-									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-								<% end %>
-							<% end %>	
+								<% elsif current_user && current_user.type == "Ta" %>
+									<% if meeting.student_id == nil %>
+										<h3><span class="label label-info">Available</span></h3>
+										<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
+									<% else %>
+									<h3><span class="label label-warning">Not Available</span></h3>
+										<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+									<% end %>
+								<% end %>	
+							</div>
 			      </div>
-			    </div>
 			  </div>
 			</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="container pull-right">
+		<%= link_to "All TAs", tas_path, class: "btn btn-secondary" %>
+		<% if current_user && current_user.type = "Ta" %>
+			<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
 		<% end %>
-	<%= link_to "All TAs", tas_path, class: "btn btn-primary" %>
-	<% if current_user && current_user.type = "Ta" %>
-		<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-default" %>
-	<% end %>
-</div>
+	</div>
