@@ -21,3 +21,6 @@ public/system/
 
 # Ignore ENV
 .env
+
+# Ignore byebug_history
+.byebug_history

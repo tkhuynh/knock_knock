@@ -44,6 +44,9 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# friendly IDs for pretty URLs
+gem 'friendly_id', '~> 5.1.0'
+
 group :production do
   gem 'rails_12factor'
 end

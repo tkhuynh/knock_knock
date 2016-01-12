@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = @user.id
 			if @user.type == "Ta"
 				#after login redirect ta to profile page
-				redirect_to ta_path(@user)
+				redirect_to ta_path(@user.slug)
 			else
 				#after login redirect student to all TA page
 				redirect_to tas_path

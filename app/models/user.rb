@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   validates :type, presence: true, on: :create
 	validates	:password, length: {minimum: 6}, on: :create
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+
 end
