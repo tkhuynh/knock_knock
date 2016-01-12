@@ -176,7 +176,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk
+  aws-sdk (~> 2.2, >= 2.2.9)
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3, >= 3.3.6)
   bootstrap3-datetimepicker-rails (~> 4.17.37)

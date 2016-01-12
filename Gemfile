@@ -29,7 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem "paperclip", "~> 4.3"
 
 # AWS 3
-gem "aws-sdk"
+gem 'aws-sdk', '~> 2.2', '>= 2.2.9'
 
 # Bootstrap Sass
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
