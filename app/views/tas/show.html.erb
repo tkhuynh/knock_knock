@@ -1,24 +1,21 @@
 <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">
-                    	<img  src="https://cdn4.iconfinder.com/data/icons/bussines-people/288/avatar-man-glasses-512.png" class="avatar">
-                        <div class="well">
-                        <h4>Paper clip uploader feat here</h4>
-                    	<h2><%= @ta.name %></h2>
-                    	<h2><%= @ta.email %></h2>
-                    	<% if current_user && current_user.type == "Ta" %>
-                    		<%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
-                    		<%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
-                    	<% else %>
-                    		<%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
-                    	<% end %>
-
-                    	
-                    </h2>
-                    </div>
-                    <hr class="primary">
-                </div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">
+                <%= image_tag @ta.image.url(:medium) %>
+            	<h2><%= @ta.name %></h2>
+            	<h2><%= @ta.email %></h2>
+            	<% if current_user && current_user.type == "Ta" %>
+            		<%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
+            		<%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+            	<% else %>
+            		<%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+            	<% end %>
+            </h2>
             </div>
+            <hr class="primary">
         </div>
+    </div>
+</div>
+
 
