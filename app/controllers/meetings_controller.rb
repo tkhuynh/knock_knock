@@ -3,7 +3,7 @@ class MeetingsController < ApplicationController
   before_action :find_meeting, only: [:show, :edit, :update, :destroy]
 
   def index
-    @ta = Ta.find(params[:ta_id])
+    @ta = Ta.friendly.find(params[:ta_id])
   	@meetings= Ta.find(@ta).meetings
   end
 
@@ -17,24 +17,7 @@ class MeetingsController < ApplicationController
       redirect_to login_path
     end
   end
-
-  # def create
-  #   #only current user who is TA to create new meeting
-  #   if current_user.type == "Ta"
-  #     @ta = current_user
-  #     @meeting = current_user.meetings.new(meeting_params)
-  #   	if @meeting.save
-  #       flash[:notice] = "Successfully created a meeting."
-  #   		redirect_to meeting_path(@meeting)
-  #   	else
-  #       flash[:errors] = @meeting.errors.full_messages.join(", ")
-  #   		render action: :new # prevent clearing filled in form when validation failed
-  #   	end
-  #   else
-  #     redirect_to login_path
-  #   end
-  # end
-
+  
   def create
     if current_user.type = "Ta"
       @ta = current_user
