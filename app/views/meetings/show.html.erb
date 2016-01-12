@@ -1,3 +1,11 @@
+
+
+<br><br>
+<div class="container well">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+
 <h2><%= @meeting.subject %></h2>
 <h4><%= Ta.find(@meeting.ta_id).name unless current_user && current_user.type == "Ta" %></h4>
 <h3><%= @meeting.start_time.to_formatted_s(:long_ordinal) %></h3>
@@ -17,3 +25,6 @@
 	<% end %>
 <% end %>
 <%= link_to "Back to List", ta_meetings_path(@meeting.ta_id), class: "btn btn-primary" %>
+
+
+</div></div></div>

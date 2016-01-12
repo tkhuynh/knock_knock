@@ -1,36 +1,35 @@
-<h1>Meetings#index</h1>
-Find me in app/views/meetings/index.html.erb</p>
-<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
-<% @meetings.each do |meeting| %>
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <div class="caption">
-        <h3><%= link_to meeting.subject, meeting_path(meeting) %></h3>
-        <h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h3>
-				<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
-				<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
-				<% if !current_user || (current_user && current_user.type == "Student") %>
-					<% if meeting.student_id == nil %>
-						<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-success" %>
-					<% else %>
-						<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-					<% end %>
-				<% elsif current_user && current_user.type == "Ta" %>
-					<% if meeting.student_id == nil %>
-						<h3><span class="label label-success">Available</span></h3>
-						<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-default" %>
-					<% else %>
-						<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-					<% end %>
-				<% end %>	
-      </div>
-    </div>
-  </div>
+<div class="container well">
+	<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
+		<% @meetings.each do |meeting| %>
+			<div class="row">
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <div class="caption">
+			        <h3><%= link_to meeting.subject, meeting_path(meeting) %></h3>
+			        <h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h3>
+							<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
+							<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
+							<% if !current_user || (current_user && current_user.type == "Student") %>
+								<% if meeting.student_id == nil %>
+									<%= button_to "Reserve", meeting_path(meeting), method: :put, class: "btn btn-success" %>
+								<% else %>
+									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+								<% end %>
+							<% elsif current_user && current_user.type == "Ta" %>
+								<% if meeting.student_id == nil %>
+									<h3><span class="label label-success">Available</span></h3>
+									<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-default" %>
+								<% else %>
+									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+								<% end %>
+							<% end %>	
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		<% end %>
+	<%= link_to "All TAs", tas_path, class: "btn btn-primary" %>
+	<% if current_user && current_user.type = "Ta" %>
+		<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-default" %>
+	<% end %>
 </div>
-<% end %>
-
-<%= link_to "All TAs", tas_path, class: "btn btn-primary" %>
-<% if current_user && current_user.type = "Ta" %>
-	<%= link_to "Back to Profile", ta_path(@ta), class: "btn btn-default" %>
-<% end %>

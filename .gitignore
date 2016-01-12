@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore all user photos
+public/system/
+
+# Ignore ENV
+.env
