@@ -5,7 +5,7 @@ class TasController < ApplicationController
   end
 
   def show
-     @ta = Ta.find_by_id(params[:id])
+     @ta = Ta.friendly.find(params[:id])
   end
 
 end

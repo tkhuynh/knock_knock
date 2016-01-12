@@ -101,11 +101,11 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :image, :type, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :image, :type, :password, :password_confirmation, :singup_login_page)
   end
 
   def find_user
-    @user = User.find_by_id(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
 end
