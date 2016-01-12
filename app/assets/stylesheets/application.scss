@@ -11,6 +11,8 @@
  * file per style scope.
  *
  */
+ @import url(https://fonts.googleapis.com/css?family=Julius+Sans+One);
+ @import url(https://fonts.googleapis.com/css?family=Merriweather+Sans:800);
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
@@ -114,10 +116,32 @@ a:focus {
     color: #eb3812;
 }
 
-h1,
-h2,
-h3,
-h4,
+h1 {
+  font-family: "Julius Sans One";
+  font-weight: bold;
+  font-size: 25pt;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Julius Sans One";
+  font-weight: Bold;
+  font-size: 18pt;
+  text-align: center;
+}
+
+h3 {
+  font-family: "Julius Sans One";
+  font-weight: normal;
+  font-size: 16pt;
+  text-align: center;
+}
+h4 {
+  font-family: "Julius Sans One";
+  font-weight: normal;
+  font-size: 12pt;
+  text-align: center;
+}
 h5,
 h6 {
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
@@ -267,6 +291,22 @@ header {
     background-size: cover;
     -o-background-size: cover;
     /*opacity: 0.9;*/
+}
+
+header .header-small {
+    position: relative;
+    width: 100%;
+    max-height: 200px;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+     background-image:url('https://images.unsplash.com/1/bag-and-hands.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=c7e4433b55700a7d33d63dd62f810b6f');
+     background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    opacity: 0.5;
 }
 
 header .header-content {
@@ -556,4 +596,9 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: #222;
+}
+
+.avatar {
+    max-width: 300px;
+    max-height: 300px;
 }

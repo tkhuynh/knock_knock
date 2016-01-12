@@ -32,5 +32,5 @@ Find me in app/views/meetings/index.html.erb</p>
 
 <%= link_to "All TAs", tas_path, class: "btn btn-primary" %>
 <% if current_user && current_user.type = "Ta" %>
-	<%= link_to "Back to Profile", ta_path(@ta), class: "btn btn-default" %>
+	<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-default" %>
 <% end %>
