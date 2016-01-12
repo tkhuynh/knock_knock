@@ -19,5 +19,5 @@
 # Ignore all user photos
 public/system/
 
-# Ignore Environment Configuration Files
-config/environments/
+# Ignore ENV
+.env
