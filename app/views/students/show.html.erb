@@ -9,7 +9,7 @@
 			<% end %>
 	</div>
 </div>
-<h3>Upcoming schedulled meetings</h3>
+<h3>Scheduled meetings</h3>
 <div class="container">
 	<div class="col-lg-12 text-center well">
 			<% @student.meetings.each do |meeting| %>
@@ -38,5 +38,5 @@
 	</div>
 </div>
 <div>
-	<%= link_to "Find available tutors", tas_path, class: "btn btn-primary pull-right" %>
+	<%= link_to "Find available instructors", tas_path, class: "btn btn-primary pull-right" %>
 </div>

@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="text-center">
-    <h1>List of Available Tutors</h1>
+    <h1>List of available Instructors</h1>
   </div>
 </div>
 <div class="container well">
@@ -13,7 +13,7 @@
             <div class="caption">
               <div id="home" class="tab-pane fade in active">
                 <%= image_tag ta.image.url(:thumb) %>
-                <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
+                <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> available</h2>
                 <h3><span class="btn btn-secondary"><%= link_to "View Profile", ta_path(ta) %></span></h3>
                 <h3><span class="btn btn-secondary"><%= link_to "View Availability", ta_meetings_path(ta) %></span></h3>
               </div>
@@ -22,7 +22,7 @@
         </div>
       <% end %>
       <% else %>
-        <h1 text-center>There aren't any TA signed up!</h1>
+        <h1 text-center>There aren't any Instructors signed up!</h1>
     <% end %>
   </div>
 </div>
