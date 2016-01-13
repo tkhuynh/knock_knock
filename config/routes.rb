@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	root 'users#new'
+  root to: 'users#new'
 
   resources :users
   resources :meetings, except: :index
