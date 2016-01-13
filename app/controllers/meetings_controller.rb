@@ -4,7 +4,8 @@ class MeetingsController < ApplicationController
 
   def index
     @ta = Ta.friendly.find(params[:ta_id])
-  	@meetings= Ta.find(@ta).meetings
+  	@meetings= Ta.find(@ta).meetings.order("start_time ASC")
+    @groups = Ta.find(@ta).meetings.group_by { |t| Date.commercial(Time.now.year, t.start_time.to_date.cweek) }
   end
 
   def new
@@ -19,7 +20,7 @@ class MeetingsController < ApplicationController
   end
   
   def create
-    if current_user.type = "Ta"
+    if current_user.type == "Ta"
       @ta = current_user
       available_time_start =  Time.parse(meeting_params[:start_time]).to_i
       available_time_end = Time.parse(meeting_params[:end_time]).to_i
