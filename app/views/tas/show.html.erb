@@ -1,6 +1,7 @@
+<h1>Tutor's Profile</h1>
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12 text-center">
+  <!-- <div class="row"> -->
+    <div class="col-lg-12 text-center well">
       <h2 class="section-heading">
       <%= image_tag @ta.image.url(:medium) %>
       <h2><%= @ta.name %></h2>
@@ -15,7 +16,7 @@
         <%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
       <% end %>
       </h2>
-      <hr class="primary">
+     
     </div>
   </div>
 </div>

@@ -1,24 +1,26 @@
+<div class="container">
+  <div class="text-center">
+    <h1>List of Available Tutors</h1>
+  </div>
+</div>
 <div class="container well">
   <div class="col-lg-12 text-center">
-    <div class="thumbnail">
-      <div class="caption">
-        <div id="home" class="tab-pane fade in active">
-          <% if @tas %>
-            <% @tas.each do |ta| %>
-              <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
-              <h3>
-                <span class="label label-default"><%= link_to "View Profile", ta_path(ta) %></span>
-              </h3>
-              <h3>
-                <span class="label label-default"><%= link_to "View Availability", ta_meetings_path(ta) %></span>
-              </h3>
-              <hr class="primary">
-            <% end %>
-          <% else %>
-              <h1 text-center>There aren't any TA signed up!</h1>
-          <% end %>
+    <% if @tas %>
+      <% @tas.each do |ta| %>
+        <div class="col-sm-6 col-md-4 col-lg-4 text-center">
+          <div class="thumbnail">
+            <div class="caption">
+              <div id="home" class="tab-pane fade in active">
+                <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> availables</h2>
+                <h3><span class="btn btn-secondary"><%= link_to "View Profile", ta_path(ta) %></span></h3>
+                <h3><span class="btn btn-secondary"><%= link_to "View Availability", ta_meetings_path(ta) %></span></h3>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      <% end %>
+      <% else %>
+        <h1 text-center>There aren't any TA signed up!</h1>
+    <% end %>
   </div>
 </div>
