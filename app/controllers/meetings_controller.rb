@@ -20,7 +20,7 @@ class MeetingsController < ApplicationController
   end
   
   def create
-    if current_user.type = "Ta"
+    if current_user.type == "Ta"
       @ta = current_user
       available_time_start =  Time.parse(meeting_params[:start_time]).to_i
       available_time_end = Time.parse(meeting_params[:end_time]).to_i

@@ -105,7 +105,7 @@
 </div>
 <div class="container pull-right">
 	<%= link_to "All TAs", tas_path, class: "btn btn-secondary" %>
-	<% if current_user && current_user.type = "Ta" %>
+	<% if current_user && current_user.type == "Ta" %>
 	<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
 	<% end %>
 </div>
