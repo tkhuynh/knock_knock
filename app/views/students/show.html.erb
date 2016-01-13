@@ -22,7 +22,9 @@
 								<h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h3>
 								<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
 								<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
-								<%= link_to "Cancel", meeting, method: :delete, class: "btn btn-danger" %>
+								<% if current_user == @student %>
+									<%= link_to "Cancel", meeting, method: :delete, class: "btn btn-danger" %>
+								<% end %>
 							</div>
 						</div>
 					</div>

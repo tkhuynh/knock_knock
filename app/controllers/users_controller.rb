@@ -86,7 +86,7 @@ class UsersController < ApplicationController
     #when logged in student delete his account, set cancel reserved account
     elsif current_user.type == "Student" && current_user == @user
       current_user.meetings.each do |meeting|
-        meeting.update_attributes(student_id: nil)
+        meeting.update_attributes(student_id: nil, subject: nil)
       end
       @user.destroy
       session[:user_id] = nil
