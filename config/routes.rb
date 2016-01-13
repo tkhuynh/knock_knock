@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	root 'tas#index'
+	root 'users#new'
 
   resources :users
   resources :meetings, except: :index
