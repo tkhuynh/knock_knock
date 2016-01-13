@@ -81,16 +81,23 @@ class MeetingsController < ApplicationController
   end
 
   def destroy
-    if current_user.type == "Ta"
+
+    if current_user.type == "Ta" && current_user.id == @meeting.ta_id
       @meeting.destroy
       flash[:notice] = "Successfully delete the meeting."
       redirect_to ta_path(current_user)
-    elsif current_user.type == "Student"
+    elsif current_user.type == "Ta" && current_user.id != @meeting.ta_id
+      flash[:error] = "You can't delete other TA meeting."
+      redirect_to ta_path(current_user)
+    elsif current_user.type == "Student" && current_user.id == @meeting.student_id
       @meeting.update_attributes(student_id: nil, subject: nil)
       flash[:notice] = "Successfully cancel the meeting."
       redirect_to student_path(current_user)
-    else
+    elsif current_user.type == "Student" && current_user.id != @meeting.student_id
+      flash[:error] = "You cant' cancel other student's meeting."
       redirect_to student_path(current_user)
+    elsif !current_user
+      redirect_to login_path
     end
   end
 
