@@ -1,13 +1,8 @@
-
-
-
-
 <div class="containter">
 	<div class="row">
-	<h2 class="text-center">Log In To Your Account</h1>
+		<h2 class="text-center">Log In To Your Account</h2>
 		<div class="col-sm-6 col-sm-offset-3 user_login_form well">
 			<%= form_tag '/login' do %>
-				
 				<div class="form-group">
 					<%=  label_tag :email %>
 					<%= text_field_tag :email, nil,class: "form-control" %>

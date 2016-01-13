@@ -43,7 +43,7 @@
 							<% end %>
 							<% local_start = meeting.start_time.localtime %>
 							<% local_end = meeting.end_time.localtime %>
-							<h4><strong>Date:</strong> <%= local_start.to_date %></h3>
+							<h3><strong>Date:</strong> <%= local_start.to_date %></h3>
 							<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
 							<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
 							<% if current_user && current_user.type == "Student" %>
