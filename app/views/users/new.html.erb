@@ -43,19 +43,23 @@
 				</div>
 				<div class="form-group">
 					<%=  f.label :email %>
-					<%=  f.email_field :email, class: "form-control", autofocus: true %>
+					<%=  f.email_field :email, class: "form-control" %>
 				</div>
 				<div class="form-group">
 					<%=  f.label :type, "Role" %>
-					<%=  f.collection_select :type, ["Ta", "Student"], :to_s, :to_s,class: "form-control", autofocus: true %>
+					<%=  f.collection_select :type, @role, :to_s, :to_s, {prompt: "Choose a role"}, class: "form-control dropdown-toggle", required: true %>
+				</div>
+				<div class="form-group">
+					<%= f.label :course_id, "Class"  %>
+					<%= f.collection_select :course_id, Course.all, :id, :name, {prompt: "Choose a class"}, class: "form-control dropdown-toggle", required: true %>
 				</div>
 				<div class="form-group">
 					<%=  f.label :password %>
-					<%=  f.password_field :password, class: "form-control", autofocus: true %>
+					<%=  f.password_field :password, class: "form-control" %>
 				</div>
 				<div class="form-group">
 					<%=  f.label :password_confirmation %>
-					<%=  f.password_field :password_confirmation, class: "form-control", autofocus: true %>
+					<%=  f.password_field :password_confirmation, class: "form-control" %>
 				</div>
 				<div class="form-group">
 					<%= f.submit "Sign Up", class: "btn btn-primary" %>
