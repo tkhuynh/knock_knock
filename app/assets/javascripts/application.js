@@ -34,4 +34,22 @@ $(function() {
 	});
 	$(".week > ul > li:first-child").addClass("active");
 	$(".week > .tab-content > div:first-child").addClass("in active");
+	$(".week").on("click", ".next", function() {
+		$current_week = $(this).parent();
+		if ($current_week.is($(".week").last()) !== true) {
+			$current_week.hide();
+			$current_week.next().show();
+		} else {
+			$(this).hide();
+		}
+	});
+	$(".week").on("click", ".prev", function() {
+		$current_week = $(this).parent();
+		if ($current_week.is($(".week").first()) !== true) {
+			$current_week.hide();
+			$current_week.prev().show();
+		} else {
+			$(this).hide();
+		}
+	});
 });

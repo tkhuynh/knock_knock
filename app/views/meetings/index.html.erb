@@ -30,8 +30,14 @@
 	<div class="col-lg-12 text-center" id="week-holder">
 		<% @groups.each do |week, meetings| %>
 			<div class="week">
+				<% if @groups.length > 1 %>
 				<h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
-				<% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+					<button class="prev">Prev</button>
+					<% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+					<button class="next">Next</button>
+				<% else %>
+					<% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+				<% end %>
 				<ul class="nav nav-tabs">
 					<% (0...day.length).each do |i| %>
 						<li><a data-toggle="tab" href="#<%= week %><%= day[i].start_time.localtime.strftime("%m-%d") %>"><%= day[i].start_time.localtime.strftime("%A %m-%d") %></a></li>
