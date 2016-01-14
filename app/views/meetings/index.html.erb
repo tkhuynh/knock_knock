@@ -1,111 +1,79 @@
-<% @groups.each do |week, meetings| %>
-	<h2><%= week.to_formatted_s(:long) %> - <%= (week + 4).to_formatted_s(:long) %></h2>
-	<% meetings.each do |meeting| %>
-		<% if meeting.subject != nil %>
-			<h3><%= meeting.subject %></h3>
-		<% end %>
-		<% local_start = meeting.start_time.localtime %>
-		<% local_end = meeting.end_time.localtime %>
-		<h4><strong>Date:</strong> <%= local_start.to_date %></h3>
-		<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
-		<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
-		<% if current_user && current_user.type == "Student" %>
-			<% if meeting.student_id == nil %>
-				<%= link_to "Reserve", edit_meeting_path(meeting), class: "btn btn-success" %>
-			<% else %>
-				<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-			<% end %>
-		<% elsif current_user && current_user.type == "Ta" %>
-			<% if meeting.student_id == nil %>
-				<h3><span class="label label-info">Available</span></h3>
-				<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
-			<% else %>
-				<h3><span class="label label-warning">Not Available</span></h3>
-				<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-			<% end %>
-		<% elsif !current_user %>
-			<%= link_to "Reserve", login_path, class: "btn btn-success" %>
-		<% end %>
-	<% end %>
-<% end %>
+<h1>Instructor's profile and availability</h1>
+<!-- Instructor's profile portion -->
+<div class="container">
+  <div class="col-lg-12 text-center well">
+    <h2 class="section-heading">
+      <%= image_tag @ta.image.url(:medium) %>
+      <h2><%= @ta.name %></h2>
+      <h2><%= @ta.email %></h2>
+      <% if current_user && current_user.type == "Ta" %>
+        <% if current_user == @ta %>
+          <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+        <% end %>
+        <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
+        <%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+      <% end %>
+    </h2>
+  </div>
+</div>
 
-<!-- ------------------- -->
+<div class="container pull-right">
+	<%= link_to "All instructors", tas_path, class: "btn btn-secondary" %>
+	<% if current_user && current_user.type == "Ta" %>
+	<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
+	<% end %>
+</div>
 
 <div class="container well">
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#home">All meetings</a></li>
-		<li><a data-toggle="tab" href="#menu1">Monday</a></li>
-		<li><a data-toggle="tab" href="#menu2">Tuesday</a></li>
-		<li><a data-toggle="tab" href="#menu3">Wednesday</a></li>
-		<li><a data-toggle="tab" href="#menu4">Thursday</a></li>
-		<li><a data-toggle="tab" href="#menu5">Friday</a></li>
-	</ul>
-	<div class="tab-content">
-		<div id="home" class="tab-pane fade in active">
-			<h3>All meetings</h3>
-			<p></p>
-		</div>
-		<div id="menu1" class="tab-pane fade">
-			<h3>Monday</h3>
-			<p>Some content for Monday's info.</p>
-		</div>
-		<div id="menu2" class="tab-pane fade">
-			<h3>Tuesday</h3>
-			<p>Some content for Tuesdya's info.</p>
-		</div>
-		<div id="menu3" class="tab-pane fade">
-			<h3>Wednesday</h3>
-			<p>Some content for Wednesday's info.</p>
-		</div>
-		<div id="menu4" class="tab-pane fade">
-			<h3>Thursday</h3>
-			<p>Some content for Tursday's info.</p>
-		</div>
-		<div id="menu5" class="tab-pane fade">
-			<h3>Friday</h3>
-			<p>Some content for Friday's info.</p>
-		</div>
-		<h1 class="text-center"><%= @ta.name %>'s Meetings</h1>
-		<% @meetings.each do |meeting| %>
-			<div class="col-sm-6 col-md-4 col-lg-4 text-center">
-				<div class="thumbnail">
-					<div class="caption">
-						<div id="home" class="tab-pane fade in active">
-							<% if meeting.subject != nil %>
-								<h3><%= meeting.subject %></h3>
-							<% end %>
-							<% local_start = meeting.start_time.localtime %>
-							<% local_end = meeting.end_time.localtime %>
-							<h3><strong>Date:</strong> <%= local_start.to_date %></h3>
-							<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
-							<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
-							<% if current_user && current_user.type == "Student" %>
-								<% if meeting.student_id == nil %>
-									<%= link_to "Reserve", edit_meeting_path(meeting), class: "btn btn-success" %>
-								<% else %>
-									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+	<div class="col-lg-12 text-center">
+		<% @groups.each do |week, meetings| %>
+			<div class="week">
+				<h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
+				<% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+				<ul class="nav nav-tabs">
+					<% (0...day.length).each do |i| %>
+						<li><a data-toggle="tab" href="#<%= week %><%= day[i].start_time.localtime.strftime("%m-%d") %>"><%= day[i].start_time.localtime.strftime("%m-%d") %></a></li>
+					<% end %>
+				</ul>
+				<div class="tab-content">
+					<% (0...day.length).each do |j| %>
+						<div id="<%= week %><%= day[j].start_time.localtime.strftime("%m-%d") %>" class="tab-pane fade">
+							<% meetings.each do |meeting| %>
+								<% local_start = meeting.start_time.localtime %>
+								<% local_end = meeting.end_time.localtime %>
+								<% if local_start.strftime("%A") == day[j].start_time.localtime.strftime("%A") %>
+									<% if meeting.subject != nil %>
+										<h3><%= meeting.subject %></h3>
+									<% end %>
+									<h4><strong>Date:</strong> <%= local_start.to_date %></h4>
+									<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
+									<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
+									<% if current_user && current_user.type == "Student" %>
+										<% if meeting.student_id == nil %>
+											<%= link_to "Reserve", edit_meeting_path(meeting), class: "btn btn-primary" %>
+										<% else %>
+											<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+										<% end %>
+									<% elsif current_user && current_user.type == "Ta" %>
+										<% if meeting.student_id == nil %>
+											<h3><span class="label label-info">Available</span></h3>
+											<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
+										<% else %>
+											<h3><span class="label label-warning">Not Available</span></h3>
+											<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+										<% end %>
+									<% elsif !current_user %>
+										<%= link_to "Reserve", login_path, class: "btn btn-success" %>
+									<% end %>
+									<hr class="primary">
 								<% end %>
-							<% elsif current_user && current_user.type == "Ta" %>
-								<% if meeting.student_id == nil %>
-									<h3><span class="label label-info">Available</span></h3>
-									<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
-								<% else %>
-									<h3><span class="label label-warning">Not Available</span></h3>
-									<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
-								<% end %>
-							<% elsif !current_user %>
-								<%= link_to "Reserve", login_path, class: "btn btn-success" %>
 							<% end %>
 						</div>
-					</div>
+					<% end %>
 				</div>
 			</div>
 		<% end %>
 	</div>
-</div>
-<div class="container pull-right">
-	<%= link_to "All TAs", tas_path, class: "btn btn-secondary" %>
-	<% if current_user && current_user.type == "Ta" %>
-	<%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
-	<% end %>
 </div>
