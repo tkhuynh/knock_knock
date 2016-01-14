@@ -27,8 +27,8 @@
 			<div class="week">
 				<% if @groups.length > 1 %>
 					<h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
-					<button class="prev">Prev</button>
-					<button class="next">Next</button>
+					<button class="btn btn-secondary prev">Prev</button>
+					<button class="btn btn-secondary next">Next</button>
 				<% else %>
 					<h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
 				<% end %>
@@ -42,33 +42,34 @@
 					<% (0...day.length).each do |j| %>
 						<div id="<%= week %><%= day[j].start_time.localtime.strftime("%m-%d") %>" class="tab-pane fade">
 							<% meetings.each do |meeting| %>
-								<% local_start = meeting.start_time.localtime %>
-								<% local_end = meeting.end_time.localtime %>
-									<% if local_start.strftime("%A") == day[j].start_time.localtime.strftime("%A") %>
-									<% if meeting.subject != nil %>
-										<h3><%= meeting.subject %></h3>
-									<% end %>
-									<h4><strong>Date:</strong> <%= local_start.to_date %></h4>
-									<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
-									<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
-									<% if current_user && current_user.type == "Student" %>
-										<% if meeting.student_id == nil %>
-											<%= link_to "Reserve", edit_meeting_path(meeting), class: "btn btn-primary" %>
-										<% else %>
-											<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+								<div class="meeting-wrapper">
+									<% local_start = meeting.start_time.localtime %>
+									<% local_end = meeting.end_time.localtime %>
+										<% if local_start.strftime("%A") == day[j].start_time.localtime.strftime("%A") %>
+										<% if meeting.subject != nil %>
+											<h3><%= meeting.subject %></h3>
 										<% end %>
-									<% elsif current_user && current_user.type == "Ta" %>
-										<% if meeting.student_id == nil %>
-											<h3><span class="label label-info">Available</span></h3>
-											<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
-										<% else %>
-											<h3><span class="label label-warning">Not Available</span></h3>
-											<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+										<h4><strong>Date:</strong> <%= local_start.to_date %></h4>
+										<h4><strong>Start:</strong> <%= local_start.strftime("%H:%M") %></h4>
+										<h4><strong>End:</strong> <%= local_end.strftime("%H:%M") %></h4>
+										<% if current_user && current_user.type == "Student" %>
+											<% if meeting.student_id == nil %>
+												<%= link_to "Reserve", edit_meeting_path(meeting), class: "btn btn-primary" %>
+											<% else %>
+												<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+											<% end %>
+										<% elsif current_user && current_user.type == "Ta" %>
+											<% if meeting.student_id == nil %>
+												<h3><span class="label label-info">Available</span></h3>
+												<%= link_to "Edit", edit_meeting_path(meeting), class: "btn btn-secondary btn-sm" %>
+											<% else %>
+												<h4>Reserved by: <%= link_to Student.find(meeting.student_id).name, student_path(meeting.student_id) %></h4>
+											<% end %>
+										<% elsif !current_user %>
+											<%= link_to "Reserve", login_path, class: "btn btn-success" %>
 										<% end %>
-									<% elsif !current_user %>
-										<%= link_to "Reserve", login_path, class: "btn btn-success" %>
-									<% end %>
-								<% end %>												
+									<% end %>	
+								</div>
 							<% end %>
 						</div>
 					<% end %>
