@@ -614,6 +614,13 @@ body {
   height: 100px;
   margin: 1em;
 }
+
 .Julius-Sans-One{
     font-family: "Julius Sans One";
 }
+
+/* hide all weeks except first one */
+.week:not(:first-child) {
+  display: none;
+}
+

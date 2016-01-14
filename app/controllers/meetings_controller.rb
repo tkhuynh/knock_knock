@@ -68,7 +68,9 @@ class MeetingsController < ApplicationController
       # when student reserve meeting, add student_id to meeting
       get_subject = meeting_params[:subject]
       get_student_id = current_user.id
+      ta = Ta.find(@meeting.ta_id)
       if @meeting.update_attributes(subject: get_subject, student_id: get_student_id)
+        Notifier.reserved(current_user, @meeting, ta).deliver_now
         flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else
@@ -92,6 +94,8 @@ class MeetingsController < ApplicationController
       redirect_to ta_path(current_user)
     elsif current_user.type == "Student" && current_user.id == @meeting.student_id
       @meeting.update_attributes(student_id: nil, subject: nil)
+      ta = Ta.find(@meeting.ta_id)
+      Notifier.cancel(current_user, @meeting, ta).deliver_now
       flash[:notice] = "Successfully cancel the meeting."
       redirect_to student_path(current_user)
     elsif current_user.type == "Student" && current_user.id != @meeting.student_id

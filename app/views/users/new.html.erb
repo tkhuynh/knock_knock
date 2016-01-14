@@ -1,71 +1,65 @@
-<!-- Header version 2 -->
 <header>
-    <div class="header-content">
-        <div class="header-content-inner">
-      <!--  <p> Here is where the logo will go </p> -->
+  <div class="header-content">
+    <div class="header-content-inner">
 			<img src="http://i.imgur.com/9X06zW4.png">
-           
-            <h2>Easily book office hours with your instructors</h2>
-            <hr class="primary">
-            <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign up now!</a> 
-            <!-- <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as an Instructor</a> -->
-        </div>
+			<h2>Easily book office hours with your instructors</h2>
+			<hr class="primary">
+      <a href="#about" class="btn btn-primary btn-xl page-scroll">Learn More</a> 
     </div>
+  </div>
 </header>
 
 <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">What we do</h2>
-                    <hr class="light">
-                    <p class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</p>
-                    <!-- <a href="#" class="btn btn-default btn-xl">Get Started!</a> -->
-                    <a href="#signup" class= "btn btn-secondary">Get started!</a>
-                    <%= link_to "See how it works", tas_path, class: "btn btn-secondary" %>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 text-center">
+        <h2 class="section-heading">What we do</h2>
+        <hr class="light">
+        <p class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</p>
+        <a href="#sign-up" class= "btn btn-secondary">Get started!</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Log in form will move the landing page to another place later -->
-
-
-
-<div class="containter well" id="signup">
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 well">
-			<%= form_for @user do |f| %>
-				<h3>Sign Up</h3>
-				<div class="form-group">
-					<%=  f.label :name %>
-					<%=  f.text_field :name, class: "form-control" %>
+<% if !current_user %>
+	<section id="sign-up">
+		<div class="containter">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 well">
+					<%= form_for @user do |f| %>
+						<h3>Sign Up</h3>
+						<div class="form-group">
+							<%=  f.label :name %>
+							<%=  f.text_field :name, class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<%=  f.label :email %>
+							<%=  f.email_field :email, class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<%=  f.label :type, "Role" %>
+							<%=  f.collection_select :type, @role, :to_s, :to_s, {prompt: "Choose a role"}, class: "form-control dropdown-toggle", required: true %>
+						</div>
+						<div class="form-group">
+							<%= f.label :course_id, "Class"  %>
+							<%= f.collection_select :course_id, Course.all, :id, :name, {prompt: "Choose a class"}, class: "form-control dropdown-toggle", required: true %>
+						</div>
+						<div class="form-group">
+							<%=  f.label :password %>
+							<%=  f.password_field :password, class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<%=  f.label :password_confirmation %>
+							<%=  f.password_field :password_confirmation, class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<%= f.submit "Sign Up", class: "btn btn-primary" %>
+						</div>
+					<% end %>
+					<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>
 				</div>
-				<div class="form-group">
-					<%=  f.label :email %>
-					<%=  f.email_field :email, class: "form-control" %>
-				</div>
-				<div class="form-group">
-					<%=  f.label :type, "Role" %>
-					<%=  f.collection_select :type, @role, :to_s, :to_s, {prompt: "Choose a role"}, class: "form-control dropdown-toggle", required: true %>
-				</div>
-				<div class="form-group">
-					<%= f.label :course_id, "Class"  %>
-					<%= f.collection_select :course_id, Course.all, :id, :name, {prompt: "Choose a class"}, class: "form-control dropdown-toggle", required: true %>
-				</div>
-				<div class="form-group">
-					<%=  f.label :password %>
-					<%=  f.password_field :password, class: "form-control" %>
-				</div>
-				<div class="form-group">
-					<%=  f.label :password_confirmation %>
-					<%=  f.password_field :password_confirmation, class: "form-control" %>
-				</div>
-				<div class="form-group">
-					<%= f.submit "Sign Up", class: "btn btn-primary" %>
-				</div>
-			<% end %>
-			<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>
+			</div>
 		</div>
-	</div>
-</div>
+	</section>
+<% end %>
