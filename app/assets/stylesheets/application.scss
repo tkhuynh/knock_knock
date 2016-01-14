@@ -676,4 +676,7 @@ body {
   height: 100px;
   margin: 1em;
 }
-
+/* hide all weeks except first one */
+.week:not(:first-child) {
+  display: none;
+}

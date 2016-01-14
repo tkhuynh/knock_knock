@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     else 
       updated_user_params = user_params
       updated_user_params["type"] = "Ta"
-      byebug
       @user = User.new(updated_user_params)
       if @user.save
         session[:user_id] = @user.id

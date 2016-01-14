@@ -32,6 +32,6 @@ $(function() {
 	    // disabledHours: [0, 1, 2, 3, 4, 5, 6, 7, 22, 23, 24],
 		// enabledHours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
 	});
-	$(".week > ul > li:first").addClass("active");
-	$(".week > .tab-content > div:first").addClass("in active");
+	$(".week > ul > li:first-child").addClass("active");
+	$(".week > .tab-content > div:first-child").addClass("in active");
 });
