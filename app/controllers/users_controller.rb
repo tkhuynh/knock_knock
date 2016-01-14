@@ -8,14 +8,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    #don't let current user see signup page
     @role = ["Ta", "Student"]
-    @singup_login_page = true
-    if current_user
-      redirect_to user_path(current_user)
-    else
-      @user = User.new
-    end
+    @user = User.new
   end
 
   def create
