@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_secure_password
 
+  belongs_to :course
+
 	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "https://upload.wikimedia.org/wikipedia/commons/3/37/No_person.jpg"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
@@ -17,6 +19,5 @@ class User < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name, use: :slugged
-
 
 end
