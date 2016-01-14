@@ -8,14 +8,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    #don't let current user see signup page
-    @role = ["Ta", "Student"]
-    @singup_login_page = true
-    if current_user
-      redirect_to user_path(current_user)
-    else
-      @user = User.new
-    end
+    @role = ["Instructor", "Student"]
+    @user = User.new
   end
 
   def create
@@ -23,7 +17,9 @@ class UsersController < ApplicationController
     if current_user
       redirect_to user_path(current_user) 
     else 
-      @user = User.new(user_params)
+      updated_user_params = user_params
+      updated_user_params["type"] = "Ta"
+      @user = User.new(updated_user_params)
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "Successfully signed up."
