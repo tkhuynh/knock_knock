@@ -2,11 +2,13 @@
 <header>
     <div class="header-content">
         <div class="header-content-inner">
-       <p> Here is where the logo will go </p>
-			<img src="">
-            <hr>
-            <p>Easily book office hours with your instructors</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as Student</a> <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as an Instructor</a>
+      <!--  <p> Here is where the logo will go </p> -->
+			<img src="http://i.imgur.com/9X06zW4.png">
+           
+            <h2>Easily book office hours with your instructors</h2>
+            <hr class="primary">
+            <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign up now!</a> 
+            <!-- <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as an Instructor</a> -->
         </div>
     </div>
 </header>
@@ -19,27 +21,25 @@
                     <hr class="light">
                     <p class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</p>
                     <!-- <a href="#" class="btn btn-default btn-xl">Get Started!</a> -->
-                    <%= link_to "Get started", signup_path, class: "btn btn-secondary" %>
+                    <a href="#signup" class= "btn btn-secondary">Get started!</a>
                     <%= link_to "See how it works", tas_path, class: "btn btn-secondary" %>
                 </div>
             </div>
         </div>
     </section>
 
-
-
 <!-- Log in form will move the landing page to another place later -->
 
 
 
-<div class="containter">
+<div class="containter well" id="signup">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3 well">
 			<%= form_for @user do |f| %>
 				<h3>Sign Up</h3>
 				<div class="form-group">
 					<%=  f.label :name %>
-					<%=  f.text_field :name, class: "form-control", autofocus: true %>
+					<%=  f.text_field :name, class: "form-control" %>
 				</div>
 				<div class="form-group">
 					<%=  f.label :email %>
