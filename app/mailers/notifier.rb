@@ -1,5 +1,5 @@
 class Notifier < ApplicationMailer
-	default from: 'no-reply@knock-knock.com', return_path: 'tkhuynh808@gmail.com'
+	default from: 'no-reply@knock-knock.com'
 
 	def reserved(student, meeting, ta)
 		@student = student
