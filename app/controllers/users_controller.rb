@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @role = ["Ta", "Student"]
+    @role = ["Instructor", "Student"]
     @user = User.new
   end
 
@@ -17,7 +17,10 @@ class UsersController < ApplicationController
     if current_user
       redirect_to user_path(current_user) 
     else 
-      @user = User.new(user_params)
+      updated_user_params = user_params
+      updated_user_params["type"] = "Ta"
+      byebug
+      @user = User.new(updated_user_params)
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "Successfully signed up."
