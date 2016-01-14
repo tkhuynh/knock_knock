@@ -94,6 +94,8 @@ class MeetingsController < ApplicationController
       redirect_to ta_path(current_user)
     elsif current_user.type == "Student" && current_user.id == @meeting.student_id
       @meeting.update_attributes(student_id: nil, subject: nil)
+      ta = Ta.find(@meeting.ta_id)
+      Notifier.cancel(current_user, @meeting, ta).deliver_now
       flash[:notice] = "Successfully cancel the meeting."
       redirect_to student_path(current_user)
     elsif current_user.type == "Student" && current_user.id != @meeting.student_id

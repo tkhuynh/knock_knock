@@ -1,5 +1,5 @@
 <div class="container text-center">
-	<p><%= @student.name %> <%= @meeting.start_time.localtime.strftime(" has reserved a meeting with you on %m-%d-%Y at %H:%M") %>.</p>
+	<p><%= @student.name.titlelize %><%= @meeting.start_time.localtime.strftime(" has reserved a meeting with you on %m-%d-%Y at %H:%M") %>.</p>
 	<p>Please contact <%= @student.name %> at <%= @student.email %> if there is any changes.</p>
 	<br>
 	<p>This is an automatically generated email, please do not reply!</p>
