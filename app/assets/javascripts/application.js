@@ -24,7 +24,6 @@ $(function() {
 	$('#datetimepicker_end').datetimepicker({
     format: 'YYYY-MM-DD HH:mm a'
 	});
-
-	$(".week > ul li:first").addClass("active");
-	$(".week > .tab-content div:first").addClass("in active");
+	$(".week > ul > li:first").addClass("active");
+	$(".week > .tab-content > div:first").addClass("in active");
 });
