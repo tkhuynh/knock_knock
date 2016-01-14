@@ -68,7 +68,9 @@ class MeetingsController < ApplicationController
       # when student reserve meeting, add student_id to meeting
       get_subject = meeting_params[:subject]
       get_student_id = current_user.id
+      ta = Ta.find(@meeting.ta_id)
       if @meeting.update_attributes(subject: get_subject, student_id: get_student_id)
+        Notifier.reserved(current_user, @meeting, ta).deliver_now
         flash[:notice] = "Successfully reserve a meeting."
         redirect_to student_path(current_user)
       else
