@@ -19,19 +19,29 @@
 
 $(function() {
 	$('#datetimepicker_start').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm a',
-    sideBySide: true,
-    // disabledTimeIntervals: [[moment({ h: 0 }), moment({ h: 8 })], [moment({ h: 21 }), moment({ h: 24 })]],
-    // disabledHours: [0, 1, 2, 3, 4, 5, 6, 7, 22, 23, 24],
-		// enabledHours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+    format: 'YYYY-MM-DD HH:mm a'
 	});
 	$('#datetimepicker_end').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm a',
-	    sideBySide: true,
-	    // disabledTimeIntervals: [[moment({ h: 0 }), moment({ h: 8 })], [moment({ h: 21 }), moment({ h: 24 })]],
-	    // disabledHours: [0, 1, 2, 3, 4, 5, 6, 7, 22, 23, 24],
-		// enabledHours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+    format: 'YYYY-MM-DD HH:mm a'
 	});
 	$(".week > ul > li:first-child").addClass("active");
 	$(".week > .tab-content > div:first-child").addClass("in active");
+	$(".week").on("click", ".next", function() {
+		$current_week = $(this).parent();
+		if ($current_week.is($(".week").last()) !== true) {
+			$current_week.hide();
+			$current_week.next().show();
+		} else {
+			$(this).hide();
+		}
+	});
+	$(".week").on("click", ".prev", function() {
+		$current_week = $(this).parent();
+		if ($current_week.is($(".week").first()) !== true) {
+			$current_week.hide();
+			$current_week.prev().show();
+		} else {
+			$(this).hide();
+		}
+	});
 });
