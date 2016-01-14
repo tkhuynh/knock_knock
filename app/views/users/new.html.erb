@@ -13,9 +13,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">What we do</h2>
+        <h1 class="section-heading">What we do</h1>
         <hr class="light">
-        <p class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</p>
+        <h2 class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</h2>
         <a href="#sign-up" class= "btn btn-secondary">Get started!</a>
       </div>
     </div>
@@ -53,10 +53,11 @@
 							<%=  f.label :password_confirmation %>
 							<%=  f.password_field :password_confirmation, class: "form-control" %>
 						</div>
-						<div class="form-group">
+						<div class="form-group text-center">
 							<%= f.submit "Sign Up", class: "btn btn-primary" %>
 						</div>
 					<% end %>
+					<br>
 					<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>
 				</div>
 			</div>

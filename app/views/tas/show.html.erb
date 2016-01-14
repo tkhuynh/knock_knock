@@ -7,10 +7,10 @@
       <h2><%= @ta.email %></h2>
       <% if current_user && current_user.type == "Ta" %>
         <% if current_user == @ta %>
-          <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+          <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-secondary" %>
         <% end %>
-        <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
-        <%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+        <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-secondary" %>
+        <%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-secondary" %>
       <% else %>
         <%= link_to "Availabe Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
       <% end %>
