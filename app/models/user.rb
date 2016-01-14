@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
             }
   #only validate passoword and role when signup
   validates :type, presence: true, on: :create
+  validates :course_id, presence: true, on: :create
 	validates	:password, length: {minimum: 6}, on: :create
 
   extend FriendlyId

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'users#new'
 
-  resources :users
+  resources :users, except: :new
   resources :meetings, except: :index
   resources :tas, only: [:index, :show] do 
     resources :meetings, only: :index
