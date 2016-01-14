@@ -3,10 +3,6 @@ class UsersController < ApplicationController
   before_action :find_user, except: [:index, :new, :create]
   before_action :authorize, except: [:show, :new, :create]
 
-  def index
-    @users = User.all
-  end
-
   def new
     @role = ["Instructor", "Student"]
     @user = User.new
@@ -14,11 +10,11 @@ class UsersController < ApplicationController
 
   def create
     #don't let current user create new account
-    if current_user
-      redirect_to user_path(current_user) 
-    else 
+    if !current_user 
       updated_user_params = user_params
-      updated_user_params["type"] = "Ta"
+      if updated_user_params["type"] == "Instructor"
+        updated_user_params["type"] = "Ta"
+      end
       @user = User.new(updated_user_params)
       if @user.save
         session[:user_id] = @user.id
@@ -32,11 +28,11 @@ class UsersController < ApplicationController
         flash[:error] = @user.errors.full_messages.join(', ')
         redirect_to signup_path
       end
+    elsif current_user and current_user.type == "Ta"
+      redirect_to ta_path(current_user)
+    elsif current_user and current_user.type == "Student"
+      redirect_to student_path(current_user)
     end
-  end
-
-  def show
-    #see private method
   end
 
   def edit
@@ -98,7 +94,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :image, :course_id, :type, :password, :password_confirmation, :singup_login_page)
+    params.require(:user).permit(:name, :email, :image, :course_id, :type, :password, :password_confirmation, :slug)
   end
 
   def find_user
