@@ -23,9 +23,9 @@
 </section>
 
 <% if !current_user %>
-	<section id="sign-up">
+	<section>
 		<div class="containter">
-			<div class="row">
+			<div class="row" id="sign-up">
 				<div class="col-sm-6 col-sm-offset-3 well">
 					<%= form_for @user do |f| %>
 						<h3>Sign Up</h3>

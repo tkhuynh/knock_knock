@@ -17,7 +17,7 @@
 		<% if @student.meetings.any? %>
 			<h3>Scheduled meetings</h3>
 			<% @student.meetings.each do |meeting| %>
-				<div class="row">
+				
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
 							<div class="caption">
@@ -36,7 +36,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				
 			<% end %>	
 		<% else %>
 			<h3>You don't have any scheduled meetings.</h3>

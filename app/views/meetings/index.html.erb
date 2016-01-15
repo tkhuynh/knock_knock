@@ -10,14 +10,14 @@
 	    <h2><%= @ta.email %></h2>
 	    <% if current_user && current_user.type == "Ta" %>
 	      <% if current_user == @ta %>
-	        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+	        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
 	        <% end %>
-	        <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-success" %>
-	        <%= link_to "Your Meetings", ta_meetings_path(@ta), class: "btn btn-primary" %>
+	        <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-primary" %>
+	        
 	    	<% end %>
-	    <%= link_to "All instructors", tas_path, class: "btn btn-secondary" %>
+	    
 	    <% if current_user && current_user.type == "Ta" %>
-	    <%= link_to "View TA's profile", ta_path(@ta), class: "btn btn-secondary" %>
+	    
 	    <% end %>
 	  </div>
 	</div>
