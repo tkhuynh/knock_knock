@@ -1,9 +1,4 @@
-<% if current_user.type == "Student" %>
-  <h1>Instructor's profile and availability</h1>
-<% elsif %>
-  <h1>My Profile</h1>
-<% end %>
-<div class="container">
+<div class="container" id="ta_profile">
   <div class="col-md-3 col-sm-12 text-center word-wrap well">
    <div class="img-thumb-holder">
       <%= image_tag @ta.image.url(:thumb) %>
@@ -31,7 +26,7 @@
         <% else %>
           <h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
         <% end %>
-        <% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+        <% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")}.sort_by { |meeting| meeting.start_time } %>
         <ul class="nav nav-tabs">
           <% (0...day.length).each do |i| %>
             <li><a data-toggle="tab" href="#<%= week %><%= day[i].start_time.localtime.strftime("%m-%d") %>"><%= day[i].start_time.localtime.strftime("%a %m/%d") %></a></li>
