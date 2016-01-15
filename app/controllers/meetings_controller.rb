@@ -28,7 +28,16 @@ class MeetingsController < ApplicationController
           render action: :new and return
         end
       end
-      redirect_to ta_path(current_user)
+      if slots == 1
+        flash[:notice] = slots.to_s + " meeting has been added to your canlender on " + meeting_params[:start_time].to_date.to_s
+        redirect_to ta_path(current_user)
+      elsif slots > 1
+        flash[:notice] = slots.to_s + " meetings has been added to your canlender on " + meeting_params[:start_time].to_date.to_s
+        redirect_to ta_path(current_user)
+      elsif slots < 1
+        flash[:errors] = "Duration of availabe times must be interval of 30 minutes"
+        redirect_to new_meeting_path
+      end
     else
       redirect_to login_path
     end
