@@ -1,6 +1,7 @@
 class TasController < ApplicationController
 
   def index
+    # Only allow student to see this view
     if !current_user
       redirect_to root_path
   	elsif current_user.type == "Student"
@@ -12,7 +13,6 @@ class TasController < ApplicationController
 
   def show
     @ta = Ta.friendly.find(params[:id])
-    @meetings= Ta.find(@ta).meetings.order("start_time ASC")
     @groups = Ta.find(@ta).meetings.group_by { |t| Date.commercial(Time.now.year, t.start_time.to_date.cweek) }
     unless current_user.id == @ta.id or current_user.type == "Student"
       if current_user.type == "Ta"

@@ -1,8 +1,8 @@
-<h1>My Profile</h1>
-<div class="container">
+<div class="container" id="student_profile">
 	<div class="col-lg-12 text-center well">
-		<%= image_tag @student.image.url(:thumb) %>
-			<h2><%= @student.name %></h2>
+		<%= image_tag @student.image.url(:medium) %>
+			<h3><%= @student.name.titleize %></h3>
+			<h4 class="text-center"><%= fa_icon('clock-o') %> Joined on <%= @student.created_at.to_date.to_formatted_s(:long_ordinal) %></h4>
 			<% if current_user == @student %>
 				<%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn btn-secondary" %>
 				<%= link_to 'Delete Profile', user_path(current_user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-secondary" %>
@@ -15,29 +15,29 @@
 <div class="container">
 	<div class="col-lg-12 text-center well">
 		<% if @student.meetings.any? %>
-			<h3>Scheduled meetings</h3>
-			<% @student.meetings.each do |meeting| %>
-				
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<div class="caption">
-								<h3><%= link_to meeting.subject %></h3>
-								<h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h4>
-								<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
-								<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
-								<div class="calendar_button">
-								<a target="_blank" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%= meeting.subject %>&dates=<%= meeting.start_time.iso8601.gsub(/[^a-z0-9\s]/i, '') %>/<%= meeting.end_time.iso8601.gsub(/[^a-z0-9\s]/i, '') %>&details=For+details,+link+here:+http://www.wdi-knock-knock-herokuapp.com&location=General+Assembly&sf=true&output=xml">
-								<img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/calendar-icon.png" style="width:50px;height:50px;">
-								</a>
-							</div>
-								<% if current_user == @student %>
-									<%= link_to "Cancel", meeting, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-primary" %>
-									<% end %>
-							</div>
+			<h2 id="student_meetings">Scheduled Meetings</h2>
+			<div class="row">
+				<% @student.meetings.each do |meeting| %>
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<div class="caption">
+							<h3><%= link_to meeting.subject %></h3>
+							<h4><strong>Date:</strong> <%= meeting.start_time.to_date %></h4>
+							<h4><strong>Start:</strong> <%= meeting.start_time.hour %>:<%= meeting.start_time.min %></h4>
+							<h4><strong>End:</strong> <%= meeting.end_time.hour %>:<%= meeting.end_time.min %></h4>
+							<div class="calendar_button">
+							<a target="_blank" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%= meeting.subject %>&dates=<%= meeting.start_time.iso8601.gsub(/[^a-z0-9\s]/i, '') %>/<%= meeting.end_time.iso8601.gsub(/[^a-z0-9\s]/i, '') %>&details=For+details,+link+here:+http://www.wdi-knock-knock-herokuapp.com&location=General+Assembly&sf=true&output=xml">
+							<img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/calendar-icon.png" style="width:50px;height:50px;">
+							</a>
+						</div>
+							<% if current_user == @student %>
+								<%= link_to "Cancel", meeting, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-primary" %>
+								<% end %>
 						</div>
 					</div>
-				
-			<% end %>	
+				</div>
+				<% end %>	
+			</div>
 		<% else %>
 			<h3>You don't have any scheduled meetings.</h3>
 		<% end %>
