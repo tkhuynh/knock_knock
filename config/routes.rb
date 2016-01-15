@@ -3,10 +3,8 @@ Rails.application.routes.draw do
   root to: 'users#new'
 
   resources :users, except: :new
-  resources :meetings, except: :index
-  resources :tas, only: [:index, :show] do 
-    resources :meetings, only: :index
-  end
+  resources :meetings, except: [:index, :show]
+  resources :tas, only: [:index, :show]
   resources :students, only: [:show]
 
   get '/login', to: 'sessions#new'

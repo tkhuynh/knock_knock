@@ -19,10 +19,12 @@
 
 $(function() {
 	$('#datetimepicker_start').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm a'
+    format: 'YYYY-MM-DD HH:mm a',
+    sideBySide: true
 	});
 	$('#datetimepicker_end').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm a'
+    format: 'YYYY-MM-DD HH:mm a',
+    sideBySide: true
 	});
 	$(".week > ul > li:first-child").addClass("active");
 	$(".week > .tab-content > div:first-child").addClass("in active");
