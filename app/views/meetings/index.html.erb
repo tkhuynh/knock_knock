@@ -42,10 +42,10 @@
 					<% (0...day.length).each do |j| %>
 						<div id="<%= week %><%= day[j].start_time.localtime.strftime("%m-%d") %>" class="tab-pane fade">
 							<% meetings.each do |meeting| %>
-								<div class="meeting-wrapper">
-									<% local_start = meeting.start_time.localtime %>
-									<% local_end = meeting.end_time.localtime %>
-										<% if local_start.strftime("%A") == day[j].start_time.localtime.strftime("%A") %>
+								<% local_start = meeting.start_time.localtime %>
+								<% local_end = meeting.end_time.localtime %>
+								<% if local_start.strftime("%A") == day[j].start_time.localtime.strftime("%A") %>
+									<div class="meeting-wrapper">
 										<% if meeting.subject != nil %>
 											<h3><%= meeting.subject %></h3>
 										<% end %>
@@ -69,8 +69,8 @@
 										<% elsif !current_user %>
 											<%= link_to "Reserve", login_path, class: "btn btn-success" %>
 										<% end %>
-									<% end %>	
-								</div>
+									</div>
+								<% end %>
 							<% end %>
 						</div>
 					<% end %>

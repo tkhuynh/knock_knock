@@ -31,7 +31,7 @@
 								</a>
 							</div>
 								<% if current_user == @student %>
-									<%= link_to "Cancel", meeting, method: :delete, class: "btn btn-primary" %>
+									<%= link_to "Cancel", meeting, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-primary" %>
 									<% end %>
 							</div>
 						</div>
