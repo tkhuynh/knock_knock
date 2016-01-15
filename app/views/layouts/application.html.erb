@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav id='nav' class='navbar navbar-default'>
+  <nav id='nav' class='navbar navbar-default'>
   <div class='container-fluid'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-navbar'>
@@ -39,19 +39,20 @@
       </ul>
     </div>
   </div>
-</nav>
+  </nav>
 
-<!-- error message -->
-<% flash.each do |name, msg| %>
-  <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
-    <div class="container">
-      <%= msg %>
+  <!-- error message -->
+  <% flash.each do |name, msg| %>
+    <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+      <div class="container">
+        <%= msg %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
-<%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+  
 </body>
 </html>
