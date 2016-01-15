@@ -1,9 +1,8 @@
-<h3>Edit Profile</h3>
+<h1>Edit Profile</h1>
 <div class="containter">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3 user_signup_form well">
 			<%= form_for :user, url: user_path(@user), method: :patch, html: { multipart: true } do |f| %>
-				
 				<div class="form-group">
 					<%= f.label :image %>
 					<%= f.file_field :image %>
@@ -18,6 +17,11 @@
 				</div>
 				<div class="form-group">
 					<%= f.submit "Edit", class: "btn btn-primary" %>
+					<% if current_user.type == "Student" %>
+						<%= link_to "Cancel", student_path(current_user), class: "btn btn-secondary" %>
+					<% elsif current_user.type == "Ta" %>
+						<%= link_to "Cancel", ta_path(current_user), class: "btn btn-secondary" %>
+					<% end %>
 				</div>
 			<% end %>
 		</div>

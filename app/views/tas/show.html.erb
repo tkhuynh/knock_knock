@@ -1,6 +1,4 @@
-<h1>Instructor's profile and availability</h1>
-<!-- Instructor's profile portion -->
-<div class="container">
+<div class="container" id="ta_profile">
   <div class="col-md-3 col-sm-12 text-center word-wrap well">
    <div class="img-thumb-holder">
       <%= image_tag @ta.image.url(:thumb) %>
@@ -8,6 +6,7 @@
     <div>
       <h4><%= @ta.name.titleize %></h4>
       <h4><%= @ta.email %></h4>
+      <h4 class="text-center"><%= fa_icon('clock-o') %> Joined on <%= @ta.created_at.to_date.to_formatted_s(:long_ordinal) %></h4>
         <% if current_user == @ta %>
           <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
           <%= link_to "Add a Meeting", new_meeting_path, class: "btn btn-primary" %>
@@ -27,7 +26,7 @@
         <% else %>
           <h2><%= week.to_formatted_s(:long) %> - <%= (week + 6).to_formatted_s(:long) %></h2>
         <% end %>
-        <% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")} %>
+        <% day = meetings.uniq{|meeting| meeting.start_time.localtime.strftime("%A")}.sort_by { |meeting| meeting.start_time } %>
         <ul class="nav nav-tabs">
           <% (0...day.length).each do |i| %>
             <li><a data-toggle="tab" href="#<%= week %><%= day[i].start_time.localtime.strftime("%m-%d") %>"><%= day[i].start_time.localtime.strftime("%a %m/%d") %></a></li>
