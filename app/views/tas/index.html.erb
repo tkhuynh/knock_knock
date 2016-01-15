@@ -20,11 +20,11 @@
                   <%= image_tag ta.image.url(:thumb) %>
                 </div>
                 <% avalibility_count = ta.meetings.select {|meeting| meeting.student_id == nil }.count %>
-                <h2><%= link_to ta.name.titleize, ta_meetings_path(ta) %></h2>
+                <h2><%= link_to ta.name.titleize, ta_path(ta) %></h2>
                 <% if avalibility_count > 1 %>
-                  <%= link_to (avalibility_count.to_s + " Available Meetings"), ta_meetings_path(ta), class: "btn btn-primary" %>
+                  <%= link_to (avalibility_count.to_s + " Available Meetings"), ta_path(ta), class: "btn btn-primary" %>
                 <% elsif avalibility_count == 1 %>
-                  <%= link_to (avalibility_count.to_s + " Available Meeting"), ta_meetings_path(ta), class: "btn btn-primary" %>
+                  <%= link_to (avalibility_count.to_s + " Available Meeting"), ta_path(ta), class: "btn btn-primary" %>
                 <% end %>
               </div>
             </div>

@@ -4,9 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, except: :new
   resources :meetings, except: [:index, :show]
-  resources :tas, only: [:index, :show] do 
-    resources :meetings, only: :index
-  end
+  resources :tas, only: [:index, :show]
   resources :students, only: [:show]
 
   get '/login', to: 'sessions#new'
