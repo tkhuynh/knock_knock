@@ -121,6 +121,9 @@ aside {
     padding: 0;
 }
 
+.alert-danger, .alert-info {
+    margin-bottom: 0px;
+}
 .navbar-default {
     border: 0;
     border-radius: 0;
@@ -626,7 +629,13 @@ body {
 .profile-pic {
   margin: 0 auto;
 }
+.tas_thumbnail {
+  min-height: 300px;
+}
 
+.tas_thumbnail_pic{
+  margin-bottom: 0px;
+}
 /* hide all weeks except first one */
 .week:not(:first-child) {
   display: none;
