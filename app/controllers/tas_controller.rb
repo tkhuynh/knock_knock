@@ -1,6 +1,7 @@
 class TasController < ApplicationController
 
   def index
+    # Only allow student to see this view
     if !current_user
       redirect_to root_path
   	elsif current_user.type == "Student"

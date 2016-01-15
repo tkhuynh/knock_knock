@@ -1,11 +1,6 @@
-
 <div class="container">
   <div class="text-center">
-    <% if @course_id %>
-      <h1><%= Course.find(@course_id).name %> Instructors</h1>
-    <% else %>
-      <h1>Instructors</h1>
-    <% end %>
+    <h1><%= Course.find(current_user.course_id).name %> Instructors</h1>
   </div>
 </div>
 <div class="container well">

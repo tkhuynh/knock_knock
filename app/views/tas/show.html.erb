@@ -1,5 +1,8 @@
-<h1>Instructor's profile and availability</h1>
-<!-- Instructor's profile portion -->
+<% if current_user.type == "Student" %>
+  <h1>Instructor's profile and availability</h1>
+<% elsif %>
+  <h1>My Profile</h1>
+<% end %>
 <div class="container">
   <div class="col-md-3 col-sm-12 text-center word-wrap well">
    <div class="img-thumb-holder">
