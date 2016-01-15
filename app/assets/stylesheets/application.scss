@@ -645,7 +645,11 @@ body {
   position: relative;
   padding: 10px 0px 15px 0px;
   background-color: #fff;
-  margin-bottom: 1em;    
+  margin-bottom: 1em;
+  border: 1px solid rgb(221, 221, 221);    
+}
+.meeting-wrapper:first-child {
+  border-top: none;
 }
 
 .meeting-wrapper > h4:first-child {
