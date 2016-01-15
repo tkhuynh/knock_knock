@@ -13,15 +13,19 @@
     <% if @tas %>
       <% @tas.each do |ta| %>
         <div class="col-sm-6 col-md-4 col-lg-4 text-center">
-          <div class="thumbnail">
+          <div class="thumbnail tas_thumbnail">
             <div class="caption">
               <div id="home" class="tab-pane fade in active">
-                <div class="img-thumb-holder">
+                <div class="img-thumb-holder tas_thumbnail_pic">
                   <%= image_tag ta.image.url(:thumb) %>
                 </div>
-                <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> available</h2>
-                <!-- <h3><span class="btn btn-secondary"><%= link_to "View Profile", ta_path(ta) %></span></h3> -->
-                <h2><span class="btn btn-secondary"><%= link_to "View Availability", ta_meetings_path(ta) %></span></h2>
+                <% avalibility_count = ta.meetings.select {|meeting| meeting.student_id == nil }.count %>
+                <h2><%= link_to ta.name.titleize, ta_meetings_path(ta) %></h2>
+                <% if avalibility_count > 1 %>
+                  <%= link_to (avalibility_count.to_s + " Available Meetings"), ta_meetings_path(ta), class: "btn btn-primary" %>
+                <% elsif avalibility_count == 1 %>
+                  <%= link_to (avalibility_count.to_s + " Available Meeting"), ta_meetings_path(ta), class: "btn btn-primary" %>
+                <% end %>
               </div>
             </div>
           </div>

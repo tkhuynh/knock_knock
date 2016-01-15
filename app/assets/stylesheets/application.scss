@@ -626,7 +626,13 @@ body {
 .profile-pic {
   margin: 0 auto;
 }
+.tas_thumbnail {
+  min-height: 300px;
+}
 
+.tas_thumbnail_pic{
+  margin-bottom: 0px;
+}
 /* hide all weeks except first one */
 .week:not(:first-child) {
   display: none;
