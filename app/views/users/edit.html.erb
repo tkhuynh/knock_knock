@@ -18,6 +18,11 @@
 				</div>
 				<div class="form-group">
 					<%= f.submit "Edit", class: "btn btn-primary" %>
+					<% if current_user.type == "Student" %>
+						<%= link_to "Cancel", student_path(current_user), class: "btn btn-secondary" %>
+					<% elsif current_user.type == "Ta" %>
+						<%= link_to "Cancel", ta_path(current_user), class: "btn btn-secondary" %>
+					<% end %>
 				</div>
 			<% end %>
 		</div>
