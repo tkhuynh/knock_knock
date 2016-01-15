@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-  before_action :find_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :find_meeting, only: [:edit, :update, :destroy]
 
   def index
     @ta = Ta.friendly.find(params[:ta_id])
@@ -38,9 +38,6 @@ class MeetingsController < ApplicationController
     else
       redirect_to login_path
     end
-  end
-
-  def show
   end
 
   def edit
