@@ -31,6 +31,8 @@ gem "paperclip", "~> 4.3"
 # AWS 3
 gem 'aws-sdk-v1'
 
+# Font Awesome
+gem 'font-awesome-rails', '~> 4.5'
 # Bootstrap Sass
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
