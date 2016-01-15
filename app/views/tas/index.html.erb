@@ -16,10 +16,12 @@
           <div class="thumbnail">
             <div class="caption">
               <div id="home" class="tab-pane fade in active">
-                <%= image_tag ta.image.url(:thumb) %>
+                <div class="img-thumb-holder">
+                  <%= image_tag ta.image.url(:thumb) %>
+                </div>
                 <h2><%= link_to ta.name, ta_meetings_path(ta) %> - <%= ta.meetings.select {|meeting| meeting.student_id == nil }.count %> available</h2>
                 <!-- <h3><span class="btn btn-secondary"><%= link_to "View Profile", ta_path(ta) %></span></h3> -->
-                <h3><span class="btn btn-secondary"><%= link_to "View Availability", ta_meetings_path(ta) %></span></h3>
+                <h2><span class="btn btn-secondary"><%= link_to "View Availability", ta_meetings_path(ta) %></span></h2>
               </div>
             </div>
           </div>

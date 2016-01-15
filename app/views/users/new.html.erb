@@ -1,11 +1,10 @@
 <header>
   <div class="header-content">
     <div class="header-content-inner">
-     	<p> Here is where the logo will go </p>
-			<img src="">
-      <hr>
-      <p>Easily book office hours with your instructors</p>
-      <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as Student</a> <a href="#about" class="btn btn-primary btn-xl page-scroll">Sign up as an Instructor</a>
+			<img src="http://i.imgur.com/9X06zW4.png">
+			<h2>Easily book office hours with your instructors</h2>
+			<hr class="primary">
+      <a href="#about" class="btn btn-primary btn-xl page-scroll">Learn More</a> 
     </div>
   </div>
 </header>
@@ -14,20 +13,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">What we do</h2>
+        <h1 class="section-heading">What we do</h1>
         <hr class="light">
-        <p class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</p>
-        <%= link_to "Get started", signup_path, class: "btn btn-secondary" %>
-        <%= link_to "See how it works", tas_path, class: "btn btn-secondary" %>
+        <h2 class="text-faded">Knock-Knock is a simple web app that allows students and instructors to book 1:1 meetings.  Simply login and start booking your meetings.  And its free!</h2>
+        <a href="#sign-up" class= "btn btn-secondary">Get started!</a>
       </div>
     </div>
   </div>
 </section>
-
-
-
-<!-- Log in form will move the landing page to another place later -->
-
 
 <% if !current_user %>
 	<section id="sign-up">
@@ -60,10 +53,11 @@
 							<%=  f.label :password_confirmation %>
 							<%=  f.password_field :password_confirmation, class: "form-control" %>
 						</div>
-						<div class="form-group">
+						<div class="form-group text-center">
 							<%= f.submit "Sign Up", class: "btn btn-primary" %>
 						</div>
 					<% end %>
+					<br>
 					<p class="text-center">Already have an account? <%= link_to "Click Here", login_path %> to log in.</p>
 				</div>
 			</div>

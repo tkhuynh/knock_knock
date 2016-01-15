@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   belongs_to :course
 
-	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "https://upload.wikimedia.org/wikipedia/commons/3/37/No_person.jpg"
+	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://i.imgur.com/JYbsSWZ.png?1"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 	validates :name, presence: true
