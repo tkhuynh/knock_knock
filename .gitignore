@@ -18,9 +18,11 @@
 
 # Ignore all user photos
 public/system/
+public/assets/
 
 # Ignore ENV
 .env
 
 # Ignore byebug_history
 .byebug_history
+
