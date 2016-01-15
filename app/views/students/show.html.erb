@@ -1,8 +1,9 @@
 <h1>My Profile</h1>
 <div class="container">
 	<div class="col-lg-12 text-center well">
-		<%= image_tag @student.image.url(:thumb) %>
-			<h2><%= @student.name %></h2>
+		<%= image_tag @student.image.url(:medium) %>
+			<h3><%= @student.name.titleize %></h3>
+			<h4 class="text-center"><%= fa_icon('clock-o') %> Joined on <%= @student.created_at.to_date.to_formatted_s(:long_ordinal) %></h4>
 			<% if current_user == @student %>
 				<%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn btn-secondary" %>
 				<%= link_to 'Delete Profile', user_path(current_user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-secondary" %>
