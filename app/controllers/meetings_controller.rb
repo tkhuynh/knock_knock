@@ -5,10 +5,12 @@ class MeetingsController < ApplicationController
   def new
     #only current user who is TA to see new meeting form
     if current_user.type == "Ta" 
-    @ta = current_user   
-  	 @meeting = Meeting.new
+      @meeting = Meeting.new
+    elsif current_user.type == "Student"
+      flash[:errors] = "Please email instructor if you need to change date and time."
+      redirect_to student_path(current_user)
     else
-      flash[:error] = "Login or signup as TA to create a meeting."
+      flash[:errors] = "Login or signup as TA to create a meeting."
       redirect_to login_path
     end
   end
@@ -20,17 +22,32 @@ class MeetingsController < ApplicationController
       available_time_end = Time.parse(meeting_params[:end_time]).to_i
       # 30 min slot
       slots = ((available_time_end - available_time_start) / 1800).floor
-      (0...slots).each do |i|
-        @meeting = current_user.meetings.new(start_time: Time.at(available_time_start + 1800*i), end_time: Time.at(available_time_start + 1800*(i+1)), ta_id: current_user.id)
-        if @meeting.save
-        else
-          flash[:errors] = @meeting.errors.full_messages.join(", ")
-          render action: :new and return
+      if slots > 0 and (available_time_end - available_time_start) % 1800 == 0
+        (0...slots).each do |i|
+          @meeting = current_user.meetings.new(start_time: Time.at(available_time_start + 1800*i), end_time: Time.at(available_time_start + 1800*(i+1)), ta_id: current_user.id)
+          if @meeting.save
+          else
+            flash[:errors] = @meeting.errors.full_messages.join(", ")
+            redirect_to new_meeting_path and return
+          end
         end
+        if slots == 1
+          flash[:notice] = slots.to_s + " meeting has been added to your canlender on " + meeting_params[:start_time].to_date.to_s
+          redirect_to ta_path(current_user)
+        elsif slots > 1
+          flash[:notice] = slots.to_s + " meetings has been added to your canlender on " + meeting_params[:start_time].to_date.to_s
+          redirect_to ta_path(current_user)
+        else 
+          redirect_to ta_path(current_user)
+        end
+      else
+        flash[:errors] = "Duration error: must be interval of 30 min."
+        redirect_to new_meeting_path
       end
-      redirect_to ta_path(current_user)
+    elsif current_user.type == "Student"
+      redirect_to student_path(current_user)
     else
-      redirect_to login_path
+      redirect_to root_path
     end
   end
 
@@ -81,7 +98,7 @@ class MeetingsController < ApplicationController
       flash[:notice] = "Successfully delete the meeting."
       redirect_to ta_path(current_user)
     elsif current_user.type == "Ta" && current_user.id != @meeting.ta_id
-      flash[:error] = "You can't delete other TA meeting."
+      flash[:errors] = "You can't delete other TA meeting."
       redirect_to ta_path(current_user)
     elsif current_user.type == "Student" && current_user.id == @meeting.student_id
       @meeting.update_attributes(student_id: nil, subject: nil)
@@ -90,7 +107,7 @@ class MeetingsController < ApplicationController
       flash[:notice] = "Successfully cancel the meeting."
       redirect_to student_path(current_user)
     elsif current_user.type == "Student" && current_user.id != @meeting.student_id
-      flash[:error] = "You cant' cancel other student's meeting."
+      flash[:errors] = "You cant' cancel other student's meeting."
       redirect_to student_path(current_user)
     elsif !current_user
       redirect_to login_path
