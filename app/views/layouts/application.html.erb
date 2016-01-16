@@ -33,7 +33,11 @@
             </ul>
           </li>
         <% else %>
-          <li><a href="#sign-up">Sign Up</a></li>
+          <% if params[:controller] == "sessions" %>
+          <li><%= link_to "Sign Up", root_path %></li>
+          <% else %>
+            <li><a href="#sign-up">Sign Up</a></li>
+          <% end %>  
           <li><%= link_to 'Login', login_path %></li>
         <% end %>
       </ul>
@@ -43,7 +47,7 @@
 
   <!-- error message -->
   <% flash.each do |name, msg| %>
-    <div class="alert <%= name == 'error' ? 'alert-danger' : 'alert-info' %>">
+    <div class="alert <%= name == 'errors' ? 'alert-danger' : 'alert-info' %>">
       <div class="container">
         <%= msg %>
       </div>
