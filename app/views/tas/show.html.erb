@@ -16,10 +16,14 @@
     </div>
   </div>
   <div class="col-md-9 col-sm-12 text-center well" id="week-holder">
-    <% if @groups.empty? %>
+    <% if @groups.empty? and current_user.type == "Student" %>
       <div class="alert alert-info">
         <h3><%= @ta.name.titleize %> hasn't had any available meeting.</h3>
         <h4>Click <a href="mailto:<%= @ta.email %>?Subject=I%20would%20like%20to%20schedule%20a%20meeting">here</a> to email <%= @ta.name.titleize %></h4>
+      </div>
+    <% elsif @groups.empty? and current_user.type == "Ta" %>
+      <div class="alert alert-info">
+        <h3>You don't have any available meetings yet.</h3>
       </div>
     <% else %>
       <% @groups.each do |week, meetings| %>
