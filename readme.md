@@ -1,12 +1,14 @@
 # Knock-Knock
 
-Knock-knock is a simple scheduling app where instructors and students can manage their office hours. 
+Knock-knock is a simple scheduling app for small schools or educational instutions where instructors and students can manage their office hours.
 
 - Instructors post blocks of times for their office hours.
 - Students book available timeslots.
 
 # Demo
-A live demo can be found at <https://wdi-knock-knock.herokuapp.com/>
+
+- A live demo can be found at <https://wdi-knock-knock.herokuapp.com/>
+- Demo video <https://www.youtube.com/watch?v=x6SGIhBveco&feature=youtu.be>
 
 # Technologies used
 
