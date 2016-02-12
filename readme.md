@@ -28,14 +28,6 @@ Knock-knock is a simple scheduling app for small schools or educational instutio
 # Find on Github
 Knock-Knock can be found on [Github](https://github.com/tkhuynh/knock_knock).
 
-# How to use
-
-1. Visit the Github repo and clone this repo `https://github.com/tkhuynh/knock_knock.git`
-2. Start the Rails server, by
-	- Open your Terminal / command line.
-	- `~cd` into the knock_knock directory
-	- Run the command `rails s`
-
 ![Imgur](http://i.imgur.com/g8OPkDf.jpg)
 
 # Features
@@ -54,13 +46,9 @@ Knock-Knock can be found on [Github](https://github.com/tkhuynh/knock_knock).
 
 
 - Trung Huynh - <https://github.com/tkhuynh>
-- Carlos Saavendra <https://github.com/murcielago17>
+- Carlos Saavedra <https://github.com/murcielago17>
 - Dave Sloan - <https://github.com/slnwlf>
 
-# Wishlist
-
-- Support for calendars other than Google Calendar
-- Full, interactive calendar UI instead of tab layout
  
 
 
